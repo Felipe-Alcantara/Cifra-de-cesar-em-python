@@ -21,7 +21,7 @@ def numerar(alfabeto_deslocado):
     novo_alfabeto = {letra: str(indice + 1) for indice, letra in enumerate(alfabeto_deslocado)}
     return novo_alfabeto
 
-mensagem = input('Digite uma mensagem no qual sera incripta: ')
+mensagem = input('Digite uma mensagem no qual sera incriptada(obs. não adicionar acentos): ')
 
 def input_numero():
     valor_deslocamento = (int(input("digite um valor de deslocamento do alfabeto: ")))
@@ -40,8 +40,8 @@ if resultado:
 
 mensagem_cifrada = cifrar_mensagem(mensagem, alfabeto_deslocado)
 
-# print("alfabeto inicial: 'abcdefghijklmnopqrstuvwxyz'")
-# print("Alfabeto deslocado:", alfabeto_deslocado)
-# print("Dicionário numerado:", dicionario_alfabeto)
+print("alfabeto inicial: 'abcdefghijklmnopqrstuvwxyz'")
+print("Alfabeto deslocado:", alfabeto_deslocado)
+print("Dicionário numerado:", dicionario_alfabeto)
 print('Sua mensagem é: ', mensagem)
 print('Sua mensagem encriptada é: ', mensagem_cifrada)

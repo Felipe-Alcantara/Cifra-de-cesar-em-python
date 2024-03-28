@@ -12,3 +12,14 @@ Este código é um exemplo de um cifrador de César, que é um tipo de cifra de 
 4. `input_numero()`: Esta função solicita ao usuário um valor de deslocamento e verifica se está entre -25 e 25. Se o valor estiver fora desse intervalo, a função retornará None. Caso contrário, ela chamará as funções `deslocar_alfabeto` e `numerar` e retornará o `alfabeto_deslocado` e o `dicionario_alfabeto`.
 
 O código solicita ao usuário uma mensagem e um valor de deslocamento, cifra a mensagem usando o valor de deslocamento fornecido e imprime a mensagem cifrada.
+---
+
+## Limitações
+
+Este programa foi projetado para trabalhar com o alfabeto inglês básico de 26 letras (de 'a' a 'z'). Como tal, ele não suporta caracteres acentuados comumente usados em idiomas como o português.
+
+A razão para isso é que o programa usa a função `ord` para converter cada caractere em um número correspondente à sua posição no alfabeto. Para caracteres acentuados, o valor retornado por `ord` pode estar fora do intervalo de 0 a 25, levando a um erro de "índice fora do intervalo" quando o programa tenta acessar a posição correspondente no `alfabeto_deslocado`.
+
+Para evitar esse problema, o programa solicita explicitamente ao usuário que insira uma mensagem sem acentos. Embora isso permita que o programa funcione corretamente, também limita sua utilidade para mensagens que contêm apenas caracteres do alfabeto inglês.
+
+Futuras melhorias neste programa podem incluir a expansão do alfabeto para incluir caracteres acentuados e a modificação das funções `cifrar_mensagem` e `deslocar_alfabeto` para lidar corretamente com esses caracteres.

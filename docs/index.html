@@ -301,6 +301,9 @@
             transition: all 0.3s ease;
             color: var(--text-result);
             box-shadow: 0 2px 5px var(--shadow-light);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .result-item:hover {
@@ -845,7 +848,10 @@
                 return
             
             try:
-                numeros = [int(n.strip()) for n in numeros_str.split(',')]
+                # Remove espaços extras e filtra strings vazias
+                numeros = [int(n.strip()) for n in numeros_str.split(',') if n.strip()]
+                if not numeros:
+                    raise ValueError("Lista vazia")
             except:
                 show_error('result-decodificar', '❌ Formato inválido! Use números separados por vírgula.')
                 return

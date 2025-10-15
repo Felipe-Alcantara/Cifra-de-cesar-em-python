@@ -1,0 +1,181 @@
+# ===================================================================
+#  GUIA DE DESCRIPTOGRAFIA: COMO RESOLVER MENSAGENS CIFRADAS
+# ===================================================================
+
+"""
+🔓 COMO DECIFRAR UMA MENSAGEM NUMÉRICA
+
+Para resolver uma mensagem que passou pelo codificador numérico,
+siga estes passos:
+"""
+
+# ===================================================================
+# INFORMAÇÕES NECESSÁRIAS
+# ===================================================================
+
+"""
+📋 O QUE VOCÊ PRECISA SABER:
+
+1. A MENSAGEM CIFRADA (sequência de números)
+   Exemplo: [22, 15, 22, 12, 16, 26]
+
+2. A CHAVE (valor do deslocamento)
+   Exemplo: 5
+   
+   ⚠️ SEM A CHAVE, A MENSAGEM É MUITO DIFÍCIL DE DECIFRAR!
+"""
+
+# ===================================================================
+# MÉTODO 1: USANDO O PROGRAMA DECODIFICADOR
+# ===================================================================
+
+"""
+✅ MÉTODO FÁCIL - Use o programa pronto
+
+1. Execute: decodificador_mensagem_numerica.py
+2. Cole os números quando solicitado
+3. Digite a chave
+4. Veja o resultado!
+
+Exemplo:
+   Entrada de números: 22, 15, 22, 12, 16, 26
+   Chave: 5
+   Resultado: ATAQUE
+"""
+
+# ===================================================================
+# MÉTODO 2: PROCESSO MANUAL (PARA ENTENDER A LÓGICA)
+# ===================================================================
+
+"""
+🔍 MÉTODO MANUAL - Passo a passo
+
+EXEMPLO: Decifrar [22, 15, 22, 12, 16, 26] com chave = 5
+
+PASSO 1: Criar o alfabeto deslocado
+-----------------------------------------
+Alfabeto normal:     a b c d e f g h i j k l m n o p q r s t u v w x y z
+                     ↓ desloca 5 posições para frente
+Alfabeto deslocado:  f g h i j k l m n o p q r s t u v w x y z a b c d e
+
+PASSO 2: Numerar o alfabeto deslocado
+-----------------------------------------
+f=1   g=2   h=3   i=4   j=5   k=6   l=7   m=8   n=9   o=10
+p=11  q=12  r=13  s=14  t=15  u=16  v=17  w=18  x=19  y=20
+z=21  a=22  b=23  c=24  d=25  e=26
+
+PASSO 3: Converter cada número em letra
+-----------------------------------------
+Mensagem: [22, 15, 22, 12, 16, 26]
+
+22 → procurar posição 22 → letra 'a'
+15 → procurar posição 15 → letra 't'
+22 → procurar posição 22 → letra 'a'
+12 → procurar posição 12 → letra 'q'
+16 → procurar posição 16 → letra 'u'
+26 → procurar posição 26 → letra 'e'
+
+PASSO 4: Juntar as letras
+-----------------------------------------
+a + t + a + q + u + e = "ATAQUE"
+
+✅ MENSAGEM DECIFRADA: ATAQUE
+"""
+
+# ===================================================================
+# E SE VOCÊ NÃO SOUBER A CHAVE?
+# ===================================================================
+
+"""
+🔐 QUEBRAR O CÓDIGO SEM A CHAVE (Força Bruta)
+
+Se você interceptou uma mensagem mas não tem a chave:
+
+OPÇÃO 1: Testar todas as 26 possibilidades
+-------------------------------------------
+Existem apenas 26 chaves possíveis (0 a 25, ou -25 a 25)
+Teste cada uma até encontrar uma palavra com sentido!
+
+Exemplo: Mensagem [22, 15, 22, 12, 16, 26]
+
+Tentando chave = 0:  rezulta: vevgye (sem sentido)
+Tentando chave = 1:  rezulta: ufuihf (sem sentido)
+Tentando chave = 2:  rezulta: tgtkgi (sem sentido)
+Tentando chave = 3:  rezulta: shsjhj (sem sentido)
+Tentando chave = 4:  rezulta: rgrirk (sem sentido)
+Tentando chave = 5:  rezulta: ataque ✅ ENCONTRADO!
+
+OPÇÃO 2: Análise de frequência
+-------------------------------------------
+Em português/inglês, algumas letras aparecem mais:
+- Português: a, e, o, s, r
+- Inglês: e, t, a, o, i, n
+
+Se você ver números que se repetem muito, eles podem ser
+essas letras comuns!
+"""
+
+# ===================================================================
+# SEGURANÇA E LIMITAÇÕES
+# ===================================================================
+
+"""
+🛡️ POR QUE ISSO PODE SER QUEBRADO?
+
+PONTO FRACO: Apenas 26 possibilidades de chave
+-------------------------------------------
+Um computador pode testar todas em menos de 1 segundo!
+
+COMO MELHORAR A SEGURANÇA:
+-------------------------------------------
+1. Combine com outras técnicas de criptografia
+2. Use chaves mais complexas (não apenas deslocamento)
+3. Troque a chave frequentemente
+4. Use cifras modernas (AES, RSA) para dados realmente sensíveis
+
+⚠️ IMPORTANTE: 
+Esta cifra é ótima para aprender criptografia, mas NÃO use
+para proteger dados reais e importantes! Use algoritmos modernos
+como AES-256 ou RSA para isso.
+"""
+
+# ===================================================================
+# FERRAMENTAS DISPONÍVEIS NO PROJETO
+# ===================================================================
+
+"""
+🔧 ARQUIVOS DO PROJETO E SUAS FUNÇÕES:
+
+1. codificador_decodificador_numerico.py
+   → Codifica texto em números
+   
+2. decodificador_mensagem_numerica.py
+   → Decodifica números em texto (com chave)
+   
+3. demo_processo_completo.py
+   → Demonstração visual do processo completo
+   
+4. EXEMPLOS_MENSAGENS_CIFRADAS.txt
+   → Mensagens para você praticar
+   
+5. cifra_cesar_completa.py
+   → Cifra de César tradicional (texto → texto)
+   
+6. deslocamento_alfabeto_interativo.py
+   → Consulta interativa de letras
+"""
+
+# ===================================================================
+# PRATIQUE!
+# ===================================================================
+
+"""
+🎯 EXERCÍCIOS PARA PRATICAR:
+
+1. Use EXEMPLOS_MENSAGENS_CIFRADAS.txt e tente decifrar
+2. Crie suas próprias mensagens e troque com amigos
+3. Tente quebrar uma mensagem SEM saber a chave
+4. Combine a cifra numérica com a cifra de César tradicional
+
+Divirta-se aprendendo criptografia! 🔐
+"""

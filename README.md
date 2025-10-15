@@ -1,25 +1,213 @@
-# Cifra-de-cesar
- Um código pra criar uma cifra de cesar
+# 🔐 Cifra de César em Python
 
-Este código é um exemplo de um cifrador de César, que é um tipo de cifra de substituição usada para criptografia de texto.
+Um projeto completo de criptografia usando a Cifra de César, incluindo conversão numérica e ferramentas de descriptografia.
 
-1. `deslocar_alfabeto(deslocamento)`: Esta função recebe um número inteiro como entrada e retorna uma nova string onde cada letra do alfabeto é deslocada para a direita pelo número de posições especificado pelo `deslocamento`. Por exemplo, se o `deslocamento` for 2, 'a' se tornará 'c', 'b' se tornará 'd', e assim por diante.
+## 📋 Sobre o Projeto
 
-2. `cifrar_mensagem(mensagem, alfabeto_deslocado)`: Esta função recebe uma mensagem e um alfabeto deslocado como entrada. Converte a mensagem para minúsculas e, em seguida, substitui cada letra na mensagem pela letra correspondente no `alfabeto_deslocado`. Se o caractere não for uma letra (por exemplo, um espaço ou pontuação), ele será adicionado à `mensagem_cifrada` sem alterações.
+Este projeto implementa a **Cifra de César**, um tipo clássico de cifra de substituição usada para criptografia de texto. Além da implementação tradicional, o projeto inclui várias ferramentas adicionais para codificação numérica, descriptografia e demonstrações educacionais.
 
-3. `numerar(alfabeto_deslocado)`: Esta função recebe o `alfabeto_deslocado` como entrada e retorna um dicionário onde cada letra é mapeada para sua posição no alfabeto (1 para 'a', 2 para 'b', etc.).
+## 📁 Estrutura do Projeto
 
-4. `input_numero()`: Esta função solicita ao usuário um valor de deslocamento e verifica se está entre -25 e 25. Se o valor estiver fora desse intervalo, a função retornará None. Caso contrário, ela chamará as funções `deslocar_alfabeto` e `numerar` e retornará o `alfabeto_deslocado` e o `dicionario_alfabeto`.
+```
+Cifra-de-cesar-em-python/
+│
+├── 📁 src/                    # Programas principais
+│   ├── 📁 cifra_tradicional/  # Cifra César clássica
+│   │   ├── cifra_cesar_completa.py
+│   │   └── README.md
+│   │
+│   ├── 📁 cifra_numerica/     # Cifra numérica
+│   │   ├── codificador_decodificador_numerico.py
+│   │   ├── decodificador_mensagem_numerica.py
+│   │   └── README.md
+│   │
+│   ├── 📁 ferramentas/        # Utilitários
+│   │   ├── deslocamento_alfabeto_interativo.py
+│   │   └── README.md
+│   │
+│   └── README.md
+│
+├── 📁 demos/                  # Demonstrações e exemplos
+│   ├── demo_processo_completo.py
+│   ├── EXEMPLOS_MENSAGENS_CIFRADAS.txt
+│   └── README.md
+│
+├── 📁 docs/                   # Documentação
+│   ├── GUIA_DESCRIPTOGRAFIA.txt
+│   └── README.md
+│
+├── README.md                  # Este arquivo
+├── ESTRUTURA_DO_PROJETO.txt   # Guia visual
+└── LICENSE
+```
 
-O código solicita ao usuário uma mensagem e um valor de deslocamento, cifra a mensagem usando o valor de deslocamento fornecido e imprime a mensagem cifrada.
+## 🚀 Ferramentas Disponíveis
+
+### 🔐 Cifra Tradicional (`src/cifra_tradicional/`)
+
+**`cifra_cesar_completa.py`**
+- Criptografa mensagens de texto usando deslocamento alfabético
+- Cifra de César tradicional (texto → texto cifrado)
+- Exemplo: "hello" → "khoor" (deslocamento 3)
+
+📖 [Ver documentação detalhada](src/cifra_tradicional/README.md)
+
 ---
 
-## Limitações
+### 🔢 Cifra Numérica (`src/cifra_numerica/`)
 
-Este programa foi projetado para trabalhar com o alfabeto inglês básico de 26 letras (de 'a' a 'z'). Como tal, ele não suporta caracteres acentuados comumente usados em idiomas como o português.
+**`codificador_decodificador_numerico.py`**
+- Converte mensagens em números usando alfabeto deslocado
+- Adiciona camada extra de criptografia (texto → números)
+- Exemplo: "ataque" → [22, 15, 22, 12, 16, 26]
 
-A razão para isso é que o programa usa a função `ord` para converter cada caractere em um número correspondente à sua posição no alfabeto. Para caracteres acentuados, o valor retornado por `ord` pode estar fora do intervalo de 0 a 25, levando a um erro de "índice fora do intervalo" quando o programa tenta acessar a posição correspondente no `alfabeto_deslocado`.
+**`decodificador_mensagem_numerica.py`**
+- Decifra mensagens que foram convertidas em números
+- Requer a chave (deslocamento) para funcionar
+- Exemplo: [22, 15, 22, 12, 16, 26] → "ATAQUE"
 
-Para evitar esse problema, o programa solicita explicitamente ao usuário que insira uma mensagem sem acentos. Embora isso permita que o programa funcione corretamente, também limita sua utilidade para mensagens que contêm apenas caracteres do alfabeto inglês.
+📖 [Ver documentação detalhada](src/cifra_numerica/README.md)
 
-Futuras melhorias neste programa podem incluir a expansão do alfabeto para incluir caracteres acentuados e a modificação das funções `cifrar_mensagem` e `deslocar_alfabeto` para lidar corretamente com esses caracteres.
+---
+
+### 🔧 Ferramentas (`src/ferramentas/`)
+
+**`deslocamento_alfabeto_interativo.py`**
+- Consulta interativa de letras em alfabeto deslocado
+- Útil para aprendizado e debugging
+- Modo contínuo para múltiplas consultas
+
+📖 [Ver documentação detalhada](src/ferramentas/README.md)
+
+---
+
+### 🎬 Demonstrações (`demos/`)
+
+- **`demo_processo_completo.py`**: Visualização completa do processo de codificação/decodificação
+- **`EXEMPLOS_MENSAGENS_CIFRADAS.txt`**: 7 exemplos práticos para você testar suas habilidades
+
+📖 [Ver documentação detalhada](demos/README.md)
+
+---
+
+### 📖 Documentação (`docs/`)
+
+- **`GUIA_DESCRIPTOGRAFIA.txt`**: Guia completo sobre como decifrar mensagens
+
+📖 [Ver documentação detalhada](docs/README.md)
+
+## 🎯 Como Usar
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/Felipe-Alcantara/Cifra-de-cesar-em-python.git
+
+# Entre na pasta
+cd Cifra-de-cesar-em-python
+```
+
+### Executando os Programas
+
+```bash
+# Criptografar uma mensagem (Cifra de César tradicional)
+python src/cifra_tradicional/cifra_cesar_completa.py
+
+# Codificar mensagem em números
+python src/cifra_numerica/codificador_decodificador_numerico.py
+
+# Decifrar números recebidos
+python src/cifra_numerica/decodificador_mensagem_numerica.py
+
+# Consultar alfabeto deslocado
+python src/ferramentas/deslocamento_alfabeto_interativo.py
+
+# Ver demonstração completa
+python demos/demo_processo_completo.py
+```
+
+## 📚 Guia Rápido
+
+### Para Iniciantes
+1. Execute `demos/demo_processo_completo.py` para entender o conceito
+2. Leia `docs/GUIA_DESCRIPTOGRAFIA.txt` para aprender a decifrar
+3. Pratique com os exemplos em `demos/EXEMPLOS_MENSAGENS_CIFRADAS.txt`
+
+### Para Uso Prático
+- **Criptografar texto simples:** Use `src/cifra_tradicional/cifra_cesar_completa.py`
+- **Criar código numérico:** Use `src/cifra_numerica/codificador_decodificador_numerico.py`
+- **Decifrar código recebido:** Use `src/cifra_numerica/decodificador_mensagem_numerica.py`
+
+## 🔧 Funcionalidades Técnicas
+
+### Funções Principais
+
+- **`deslocar_alfabeto(deslocamento)`**: Desloca o alfabeto por N posições
+- **`cifrar_mensagem(mensagem, alfabeto_deslocado)`**: Criptografa texto usando alfabeto deslocado
+- **`numerar(alfabeto_deslocado)`**: Cria mapeamento letra → número
+- **`criar_mapeamento_inverso()`**: Cria mapeamento número → letra para descriptografia
+---
+
+## ⚠️ Limitações
+
+- **Alfabeto:** Suporta apenas as 26 letras básicas (a-z)
+- **Acentos:** Não suporta caracteres acentuados (á, é, í, ó, ú, ã, õ, ç, etc.)
+- **Segurança:** Com apenas 26 chaves possíveis, pode ser quebrado por força bruta
+- **Uso recomendado:** Fins educacionais e recreativos
+
+### Por que não suporta acentos?
+
+O programa usa a função `ord()` para mapear caracteres às suas posições no alfabeto (0-25). Caracteres acentuados têm valores fora deste intervalo, causando erros. Para evitar isso, solicita-se ao usuário que insira mensagens sem acentos.
+
+### Melhorias Futuras
+
+- ✅ Suporte para caracteres acentuados
+- ✅ Interface gráfica (GUI)
+- ✅ Criptografia mais forte combinando múltiplas técnicas
+- ✅ Análise de frequência automática para quebrar códigos
+
+## 🛡️ Segurança
+
+⚠️ **IMPORTANTE:** Esta cifra é para fins educacionais. **NÃO** use para proteger dados sensíveis ou importantes!
+
+**Por quê?**
+- Apenas 26 possibilidades de chave
+- Facilmente quebrada por força bruta
+- Vulnerável à análise de frequência
+
+**Para dados reais, use:**
+- AES-256
+- RSA
+- Outras cifras modernas
+
+## 🎓 Objetivo Educacional
+
+Este projeto é perfeito para:
+- ✅ Aprender conceitos básicos de criptografia
+- ✅ Entender cifras de substituição
+- ✅ Praticar programação em Python
+- ✅ Estudar segurança da informação
+- ✅ Criar jogos e desafios com amigos
+
+## 📝 Licença
+
+Este projeto está sob a licença especificada no arquivo `LICENSE`.
+
+## 👤 Autor
+
+**Felipe Alcantara**
+- GitHub: [@Felipe-Alcantara](https://github.com/Felipe-Alcantara)
+- Repositório: [Cifra-de-cesar-em-python](https://github.com/Felipe-Alcantara/Cifra-de-cesar-em-python)
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+- Reportar bugs
+- Sugerir novas funcionalidades
+- Melhorar a documentação
+- Adicionar novos exemplos
+
+---
+
+⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!

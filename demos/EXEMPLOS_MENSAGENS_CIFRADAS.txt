@@ -1,0 +1,101 @@
+# ===================================================================
+#  EXEMPLOS DE MENSAGENS CIFRADAS PARA PRATICAR
+# ===================================================================
+#
+# Use estes exemplos no programa "decodificador_mensagem_numerica.py"
+# para praticar a descriptografia!
+#
+# ===================================================================
+
+"""
+EXEMPLO 1 - NÍVEL FÁCIL
+------------------------
+Mensagem cifrada: [22, 15, 22, 12, 16, 26]
+Chave (deslocamento): 5
+Dica: É um comando militar!
+
+Resposta: ataque
+"""
+
+"""
+EXEMPLO 2 - NÍVEL FÁCIL
+------------------------
+Mensagem cifrada: [11, 26, 25, 18, 9]
+Chave (deslocamento): 8
+Dica: Uma saudação comum
+
+Resposta: hello
+"""
+
+"""
+EXEMPLO 3 - NÍVEL MÉDIO
+------------------------
+Mensagem cifrada: [16, 25, 17, 5, 9, 14, 23, 15]
+Chave (deslocamento): 3
+Dica: Relacionado a programação
+
+Resposta: studying
+"""
+
+"""
+EXEMPLO 4 - NÍVEL MÉDIO
+------------------------
+Mensagem cifrada: [3, 9, 6, 18, 1]
+Chave (deslocamento): -5
+Dica: Técnica de criptografia
+
+Resposta: cifra
+"""
+
+"""
+EXEMPLO 5 - NÍVEL DIFÍCIL
+------------------------
+Mensagem cifrada: [16, 25, 9, 22, 5, 10, 5, 4, 1, 4, 5]
+Chave (deslocamento): 10
+Dica: Uma instituição de ensino
+
+Resposta: universidade
+"""
+
+"""
+EXEMPLO 6 - NÍVEL DIFÍCIL
+------------------------
+Mensagem cifrada: [3, 18, 9, 16, 7, 15, 1, 6, 9, 1]
+Chave (deslocamento): 2
+Dica: Ciência de dados
+
+Resposta: criptografia
+"""
+
+"""
+EXEMPLO 7 - DESAFIO EXTRA
+------------------------
+Mensagem cifrada: [16, 25, 9, 22, 5, 10, 5, 4, 1, 4, 5, 4, 5, 6, 5, 4, 5, 10, 1, 16]
+Chave (deslocamento): 10
+Dica: Duas palavras - uma instituição
+
+Resposta: universidadedefederal
+"""
+
+# ===================================================================
+#  COMO USAR ESTE ARQUIVO
+# ===================================================================
+#
+# 1. Execute o programa: decodificador_mensagem_numerica.py
+# 2. Copie uma das mensagens cifradas acima
+# 3. Cole quando solicitado (sem os colchetes [ ])
+# 4. Digite a chave correspondente
+# 5. Veja a mágica acontecer! ✨
+#
+# ===================================================================
+
+# ===================================================================
+#  CRIE SUAS PRÓPRIAS MENSAGENS!
+# ===================================================================
+#
+# Use o programa "codificador_decodificador_numerico.py" para criar
+# suas próprias mensagens secretas e desafie seus amigos!
+#
+# Lembre-se: A segurança depende de manter a CHAVE em segredo! 🔐
+#
+# ===================================================================

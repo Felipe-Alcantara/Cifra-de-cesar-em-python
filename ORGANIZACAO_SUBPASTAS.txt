@@ -1,0 +1,181 @@
+╔══════════════════════════════════════════════════════════════╗
+║         ORGANIZAÇÃO FINAL - SUBPASTAS EM SRC/               ║
+║              Cifra de César em Python                        ║
+╚══════════════════════════════════════════════════════════════╝
+
+📦 Cifra-de-cesar-em-python/
+│
+├── 📁 src/                              ← PROGRAMAS PRINCIPAIS
+│   │
+│   ├── 📁 cifra_tradicional/            ← CIFRA CLÁSSICA
+│   │   ├── 🔐 cifra_cesar_completa.py
+│   │   │      ├─ Criptografa texto
+│   │   │      ├─ Deslocamento alfabético
+│   │   │      └─ Texto → Texto cifrado
+│   │   │
+│   │   └── 📄 README.md
+│   │          └─ Documentação completa da cifra tradicional
+│   │
+│   ├── 📁 cifra_numerica/               ← CIFRA NUMÉRICA
+│   │   ├── 🔢 codificador_decodificador_numerico.py
+│   │   │      ├─ Codifica texto em números
+│   │   │      ├─ Texto → Números
+│   │   │      └─ Mostra conversão completa
+│   │   │
+│   │   ├── 🔓 decodificador_mensagem_numerica.py
+│   │   │      ├─ Decodifica números em texto
+│   │   │      ├─ Números → Texto
+│   │   │      └─ Requer chave
+│   │   │
+│   │   └── 📄 README.md
+│   │          └─ Documentação completa da cifra numérica
+│   │
+│   ├── 📁 ferramentas/                  ← UTILITÁRIOS
+│   │   ├── 🔍 deslocamento_alfabeto_interativo.py
+│   │   │      ├─ Consulta interativa
+│   │   │      ├─ Letra → Número
+│   │   │      └─ Modo contínuo
+│   │   │
+│   │   └── 📄 README.md
+│   │          └─ Documentação das ferramentas
+│   │
+│   └── 📄 README.md
+│          └─ Índice geral de src/ com todas as subpastas
+│
+├── 📁 demos/                            ← DEMONSTRAÇÕES
+│   ├── 🎬 demo_processo_completo.py
+│   ├── 📝 EXEMPLOS_MENSAGENS_CIFRADAS.txt
+│   └── 📄 README.md
+│
+├── 📁 docs/                             ← DOCUMENTAÇÃO
+│   ├── 📖 GUIA_DESCRIPTOGRAFIA.txt
+│   └── 📄 README.md
+│
+├── 📄 README.md                         ← README PRINCIPAL
+├── 📄 ESTRUTURA_DO_PROJETO.txt          ← ESTE ARQUIVO
+├── 📄 LICENSE
+└── 📁 .venv/                            ← AMBIENTE VIRTUAL
+
+╔══════════════════════════════════════════════════════════════╗
+║                  ORGANIZAÇÃO POR TIPO DE CIFRA               ║
+╚══════════════════════════════════════════════════════════════╝
+
+🔐 CIFRA TRADICIONAL
+────────────────────────────────────────────────────────────────
+Local: src/cifra_tradicional/
+Tipo: Texto → Texto cifrado
+Exemplo: "hello" → "khoor"
+
+Quando usar:
+  ✓ Aprender conceitos básicos
+  ✓ Criptografia simples de texto
+  ✓ Demonstrações educacionais
+  ✓ Manter formato de texto
+
+────────────────────────────────────────────────────────────────
+
+🔢 CIFRA NUMÉRICA
+────────────────────────────────────────────────────────────────
+Local: src/cifra_numerica/
+Tipo: Texto ↔ Números
+Exemplo: "ataque" → [22, 15, 22, 12, 16, 26]
+
+Quando usar:
+  ✓ Adicionar camada extra de segurança
+  ✓ Disfarçar completamente o texto
+  ✓ Transmitir como números
+  ✓ Combinar múltiplas técnicas
+
+Arquivos:
+  • codificador_decodificador_numerico.py (codificar)
+  • decodificador_mensagem_numerica.py (decodificar)
+
+────────────────────────────────────────────────────────────────
+
+🔧 FERRAMENTAS
+────────────────────────────────────────────────────────────────
+Local: src/ferramentas/
+Tipo: Utilitários auxiliares
+Exemplo: Consultar 'a' com chave 5 → posição 22
+
+Quando usar:
+  ✓ Aprender como funciona
+  ✓ Debugging de código
+  ✓ Validar cálculos
+  ✓ Criar mensagens manualmente
+
+────────────────────────────────────────────────────────────────
+
+╔══════════════════════════════════════════════════════════════╗
+║                   NAVEGAÇÃO RÁPIDA                           ║
+╚══════════════════════════════════════════════════════════════╝
+
+Para acessar cada tipo de cifra:
+
+📂 Cifra Tradicional
+   cd src/cifra_tradicional
+   python cifra_cesar_completa.py
+
+📂 Cifra Numérica
+   cd src/cifra_numerica
+   python codificador_decodificador_numerico.py
+   python decodificador_mensagem_numerica.py
+
+📂 Ferramentas
+   cd src/ferramentas
+   python deslocamento_alfabeto_interativo.py
+
+📂 Demos
+   cd demos
+   python demo_processo_completo.py
+
+╔══════════════════════════════════════════════════════════════╗
+║                VANTAGENS DA NOVA ORGANIZAÇÃO                 ║
+╚══════════════════════════════════════════════════════════════╝
+
+✅ Separação clara por tipo de cifra
+✅ Fácil adicionar novos tipos no futuro
+✅ Cada subpasta tem seu próprio README
+✅ Documentação específica para cada tipo
+✅ Estrutura escalável e profissional
+✅ Facilita manutenção e colaboração
+✅ Organização lógica e intuitiva
+
+╔══════════════════════════════════════════════════════════════╗
+║              CADA README CONTÉM INFORMAÇÕES                  ║
+╚══════════════════════════════════════════════════════════════╝
+
+📖 src/README.md
+   └─→ Visão geral de todas as subpastas
+
+📖 src/cifra_tradicional/README.md
+   └─→ Como funciona a cifra tradicional
+   └─→ Funções, exemplos, casos de uso
+
+📖 src/cifra_numerica/README.md
+   └─→ Como funciona a cifra numérica
+   └─→ Diferenças entre codificador e decodificador
+   └─→ Vantagens e limitações
+
+📖 src/ferramentas/README.md
+   └─→ Como usar as ferramentas
+   └─→ Casos de uso práticos
+   └─→ Dicas e truques
+
+╔══════════════════════════════════════════════════════════════╗
+║                    ROADMAP FUTURO                            ║
+╚══════════════════════════════════════════════════════════════╝
+
+Com esta estrutura, é fácil adicionar novos tipos:
+
+📁 src/
+├── cifra_tradicional/    ✓ Implementado
+├── cifra_numerica/       ✓ Implementado  
+├── ferramentas/          ✓ Implementado
+├── cifra_polialfabetica/ ⭕ Futuro (Vigenère)
+├── cifra_transposicao/   ⭕ Futuro (Transpor letras)
+└── cifra_substituicao/   ⭕ Futuro (Outros métodos)
+
+✨ Organizado com sucesso em: 15/10/2025
+🎯 Estrutura modular e escalável
+🔐 Pronto para crescer!

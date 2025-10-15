@@ -1,0 +1,139 @@
+╔══════════════════════════════════════════════════════════════╗
+║                  ESTRUTURA DO PROJETO                        ║
+║           Cifra de César em Python - Organizado              ║
+╚══════════════════════════════════════════════════════════════╝
+
+📦 Cifra-de-cesar-em-python/
+│
+├── 📁 src/                         [PROGRAMAS PRINCIPAIS]
+│   │
+│   ├── � cifra_tradicional/       [Cifra César Clássica]
+│   │   ├── �🔐 cifra_cesar_completa.py
+│   │   │   └─→ Criptografa texto (texto → texto cifrado)
+│   │   └── 📄 README.md
+│   │
+│   ├── 📁 cifra_numerica/          [Cifra Numérica]
+│   │   ├── 🔢 codificador_decodificador_numerico.py
+│   │   │   └─→ Codifica texto em números
+│   │   ├── 🔓 decodificador_mensagem_numerica.py
+│   │   │   └─→ Decodifica números em texto
+│   │   └── 📄 README.md
+│   │
+│   ├── 📁 ferramentas/             [Utilitários]
+│   │   ├── 🔍 deslocamento_alfabeto_interativo.py
+│   │   │   └─→ Consulta interativa de alfabeto
+│   │   └── 📄 README.md
+│   │
+│   └── 📄 README.md
+│       └─→ Índice geral dos programas
+│
+├── 📁 demos/                       [DEMONSTRAÇÕES E EXEMPLOS]
+│   ├── 🎬 demo_processo_completo.py
+│   │   └─→ Visualização completa do processo (COMECE AQUI!)
+│   │
+│   ├── 📝 EXEMPLOS_MENSAGENS_CIFRADAS.txt
+│   │   └─→ 7 exemplos para praticar (fácil → difícil)
+│   │
+│   └── 📄 README.md
+│       └─→ Roteiro de aprendizado e dicas
+│
+├── 📁 docs/                        [DOCUMENTAÇÃO]
+│   ├── 📖 GUIA_DESCRIPTOGRAFIA.txt
+│   │   └─→ Guia completo: como decifrar mensagens
+│   │
+│   └── 📄 README.md
+│       └─→ Índice da documentação e glossário
+│
+├── 📄 README.md                    [LEIA-ME PRINCIPAL]
+│   └─→ Visão geral, instalação e uso
+│
+├── 📄 LICENSE                      [LICENÇA]
+│   └─→ Termos de uso do projeto
+│
+└── 📁 .venv/                       [AMBIENTE VIRTUAL]
+    └─→ Dependências Python (gerado automaticamente)
+
+╔══════════════════════════════════════════════════════════════╗
+║                   GUIA DE USO RÁPIDO                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌─ PARA INICIANTES ────────────────────────────────────────────┐
+│                                                               │
+│  1️⃣  Execute: demos/demo_processo_completo.py               │
+│      → Entenda visualmente como funciona                     │
+│                                                               │
+│  2️⃣  Leia: docs/GUIA_DESCRIPTOGRAFIA.txt                    │
+│      → Aprenda os conceitos fundamentais                     │
+│                                                               │
+│  3️⃣  Pratique: demos/EXEMPLOS_MENSAGENS_CIFRADAS.txt        │
+│      → Teste suas habilidades de descriptografia             │
+│                                                               │
+└───────────────────────────────────────────────────────────────┘
+
+┌─ PARA USO PRÁTICO ───────────────────────────────────────────┐
+│                                                               │
+│  🔐 Criptografar texto (Cifra Tradicional):                  │
+│     python src/cifra_tradicional/cifra_cesar_completa.py     │
+│                                                               │
+│  🔢 Criar código numérico:                                   │
+│     python src/cifra_numerica/codificador_decodificador_nume │
+│     rico.py                                                   │
+│                                                               │
+│  🔓 Decifrar código recebido:                                │
+│     python src/cifra_numerica/decodificador_mensagem_numeric │
+│     a.py                                                      │
+│                                                               │
+│  🔍 Consultar alfabeto:                                      │
+│     python src/ferramentas/deslocamento_alfabeto_interativo. │
+│     py                                                        │
+│                                                               │
+└───────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║                 FLUXO DE TRABALHO TÍPICO                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+CENÁRIO 1: Enviar mensagem secreta
+───────────────────────────────────
+  1. Use: src/cifra_numerica/codificador_decodificador_numerico.py
+  2. Digite sua mensagem
+  3. Escolha uma chave (ex: 5)
+  4. Envie os números para seu amigo
+  5. Compartilhe a chave separadamente
+
+CENÁRIO 2: Receber mensagem secreta
+────────────────────────────────────
+  1. Use: src/cifra_numerica/decodificador_mensagem_numerica.py
+  2. Cole os números recebidos
+  3. Digite a chave que seu amigo compartilhou
+  4. Veja a mensagem decifrada!
+
+CENÁRIO 3: Quebrar um código (sem chave)
+─────────────────────────────────────────
+  1. Leia: docs/GUIA_DESCRIPTOGRAFIA.txt
+  2. Aprenda sobre força bruta
+  3. Teste as 26 possibilidades manualmente
+  4. Ou crie um script automatizado!
+
+╔══════════════════════════════════════════════════════════════╗
+║                    ATALHOS ÚTEIS                             ║
+╚══════════════════════════════════════════════════════════════╝
+
+📚 Toda documentação:         docs/
+🎮 Exemplos práticos:          demos/EXEMPLOS_MENSAGENS_CIFRADAS.txt
+🔧 Programas principais:       src/
+🔐 Cifra tradicional:          src/cifra_tradicional/
+🔢 Cifra numérica:             src/cifra_numerica/
+🛠️  Ferramentas:               src/ferramentas/
+📖 Guia de descriptografia:    docs/GUIA_DESCRIPTOGRAFIA.txt
+🎬 Demo visual:                demos/demo_processo_completo.py
+
+╔══════════════════════════════════════════════════════════════╗
+║                  CADA PASTA TEM SEU README                   ║
+║             Entre em cada pasta e leia o README.md           ║
+║            para informações específicas daquela seção        ║
+╚══════════════════════════════════════════════════════════════╝
+
+✨ Projeto organizado em: 15/10/2025
+🎯 Estrutura criada para facilitar aprendizado e uso
+🔐 Divirta-se aprendendo criptografia!

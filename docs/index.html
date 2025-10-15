@@ -156,6 +156,17 @@
             margin-top: 10px;
         }
 
+        .btn-copy {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            padding: 10px 20px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .btn-copy:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+        }
+
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
@@ -224,6 +235,42 @@
         .emoji {
             font-size: 1.5em;
             margin-right: 5px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            animation: slideInRight 0.5s ease-out;
+            font-weight: bold;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
         }
 
         .info-box {
@@ -508,7 +555,12 @@
                 <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}
             </div>
             <div class="result-item"><strong>📝 Mensagem original:</strong> {mensagem}</div>
-            <div class="result-item"><strong>🔐 Mensagem cifrada:</strong> {mensagem_cifrada}</div>
+            <div class="result-item">
+                <strong>🔐 Mensagem cifrada:</strong> {mensagem_cifrada}
+                <button type="button" class="btn-copy" onclick="copiarParaDecifrar('{mensagem_cifrada}', {chave}); return false;">
+                    📋 Copiar para Decifrar
+                </button>
+            </div>
             <div class="result-item"><strong>🔑 Chave usada:</strong> {chave}</div>
             """
             
@@ -590,6 +642,7 @@
             
             # Criar visualização do mapeamento
             map_display = '<br>'.join([f"{k} → {v}" for k, v in list(mapeamento.items())[:10]]) + '<br>...'
+            numeros_str = ', '.join(numeros)
             
             result_html = f"""
             <h3>✅ Mensagem Codificada</h3>
@@ -597,7 +650,12 @@
                 <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}
             </div>
             <div class="result-item"><strong>📝 Mensagem original:</strong> {mensagem}</div>
-            <div class="result-item"><strong>🔢 Mensagem em números:</strong> [{', '.join(numeros)}]</div>
+            <div class="result-item">
+                <strong>🔢 Mensagem em números:</strong> [{numeros_str}]
+                <button type="button" class="btn-copy" onclick="copiarParaDecodificar('{numeros_str}', {chave}); return false;">
+                    📋 Copiar para Decodificar
+                </button>
+            </div>
             <div class="result-item"><strong>🔑 Chave usada:</strong> {chave}</div>
             <div class="info-box">
                 <strong>📖 Mapeamento (primeiras 10 letras):</strong><br>
@@ -738,8 +796,64 @@
             // Show selected tab
             document.getElementById(tabId).classList.add('active');
             
-            // Set active button
-            event.target.closest('.tab-button').classList.add('active');
+            // Set active button - busca o botão correto
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(tabId)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function copiarParaDecifrar(mensagemCifrada, chave) {
+            // Previne comportamento padrão
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Muda para a aba de decifrar
+            showTab('tradicional-decifrar');
+            
+            // Preenche os campos
+            document.getElementById('mensagem-decifrar').value = mensagemCifrada;
+            document.getElementById('chave-decifrar').value = chave;
+            
+            // Mostra feedback com toast
+            mostrarToast('✅ Mensagem e chave copiadas! Clique em Decifrar.');
+            
+            return false;
+        }
+
+        function copiarParaDecodificar(numeros, chave) {
+            // Previne comportamento padrão
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Muda para a aba de decodificar
+            showTab('numerica-decodificar');
+            
+            // Preenche os campos
+            document.getElementById('numeros-decodificar').value = numeros;
+            document.getElementById('chave-decodificar').value = chave;
+            
+            // Mostra feedback com toast
+            mostrarToast('✅ Números e chave copiados! Clique em Decodificar.');
+            
+            return false;
+        }
+
+        function mostrarToast(mensagem) {
+            // Cria o toast
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = mensagem;
+            document.body.appendChild(toast);
+            
+            // Remove após 3 segundos
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.5s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 500);
+            }, 3000);
         }
     </script>
 </body>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifra de César - Interface Web</title>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython_stdlib.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 0;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .tab-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 252, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .tab-button {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            color: #333;
+        }
+
+        .tab-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+            transform: scale(1.05);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(102, 126, 234, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-out;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .result-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .result-item strong {
+            color: #555;
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .tab-button {
+                min-width: 150px;
+                font-size: 0.9em;
+                padding: 12px 15px;
+            }
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 5px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box strong {
+            color: #1976d2;
+        }
+
+        .alphabet-display {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 2px solid #667eea;
+            overflow-x: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .error {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+
+        .success {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 20px;
+            opacity: 0.9;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body onload="brython()">
+    <div class="container">
+        <header>
+            <h1>🔐 Cifra de César</h1>
+            <p>Interface Web Interativa - Criptografe e Decifre Mensagens</p>
+        </header>
+
+        <div class="tab-container">
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('tradicional-cifrar')">
+                    <span class="emoji">🔐</span> Cifrar Tradicional
+                </button>
+                <button class="tab-button" onclick="showTab('tradicional-decifrar')">
+                    <span class="emoji">🔓</span> Decifrar Tradicional
+                </button>
+                <button class="tab-button" onclick="showTab('numerica-codificar')">
+                    <span class="emoji">🔢</span> Codificar Numérico
+                </button>
+                <button class="tab-button" onclick="showTab('numerica-decodificar')">
+                    <span class="emoji">🔍</span> Decodificar Numérico
+                </button>
+                <button class="tab-button" onclick="showTab('consulta')">
+                    <span class="emoji">📊</span> Consulta de Alfabeto
+                </button>
+            </div>
+
+        <!-- TAB 1: Cifrar Tradicional -->
+        <div id="tradicional-cifrar" class="tab-content active">
+            <h2>🔐 Cifrar Mensagem (Tradicional)</h2>
+            <div class="info-box">
+                <strong>ℹ️ Como funciona:</strong> Desloca cada letra do alfabeto por N posições. 
+                Exemplo: Com deslocamento 3, 'A' vira 'D'.
+            </div>
+            
+            <div class="input-group">
+                <label for="mensagem-cifrar">📝 Mensagem (sem acentos):</label>
+                <textarea id="mensagem-cifrar" placeholder="Digite sua mensagem aqui..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="chave-cifrar">🔑 Chave (deslocamento -25 a 25):</label>
+                <input type="number" id="chave-cifrar" min="-25" max="25" value="3" placeholder="3">
+            </div>
+            
+            <button id="btn-cifrar">🔐 Cifrar Mensagem</button>
+            
+            <div id="result-cifrar" class="result"></div>
+        </div>
+
+        <!-- TAB 2: Decifrar Tradicional -->
+        <div id="tradicional-decifrar" class="tab-content">
+            <h2>🔓 Decifrar Mensagem (Tradicional)</h2>
+            <div class="info-box">
+                <strong>ℹ️ Como funciona:</strong> Reverte o processo de cifragem usando a mesma chave.
+            </div>
+            
+            <div class="input-group">
+                <label for="mensagem-decifrar">🔐 Mensagem Cifrada:</label>
+                <textarea id="mensagem-decifrar" placeholder="Digite a mensagem cifrada..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="chave-decifrar">🔑 Chave usada na cifragem:</label>
+                <input type="number" id="chave-decifrar" min="-25" max="25" value="3" placeholder="3">
+            </div>
+            
+            <button id="btn-decifrar">🔓 Decifrar Mensagem</button>
+            
+            <div id="result-decifrar" class="result"></div>
+        </div>
+
+        <!-- TAB 3: Codificar Numérico -->
+        <div id="numerica-codificar" class="tab-content">
+            <h2>🔢 Codificar em Números</h2>
+            <div class="info-box">
+                <strong>ℹ️ Como funciona:</strong> Converte cada letra em um número (1-26) usando alfabeto deslocado.
+                Adiciona camada extra de segurança.
+            </div>
+            
+            <div class="input-group">
+                <label for="mensagem-codificar">📝 Mensagem (sem acentos):</label>
+                <textarea id="mensagem-codificar" placeholder="Digite sua mensagem..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="chave-codificar">🔑 Chave (deslocamento -25 a 25):</label>
+                <input type="number" id="chave-codificar" min="-25" max="25" value="5" placeholder="5">
+            </div>
+            
+            <button id="btn-codificar">🔢 Codificar em Números</button>
+            
+            <div id="result-codificar" class="result"></div>
+        </div>
+
+        <!-- TAB 4: Decodificar Numérico -->
+        <div id="numerica-decodificar" class="tab-content">
+            <h2>🔍 Decodificar Números</h2>
+            <div class="info-box">
+                <strong>ℹ️ Como funciona:</strong> Converte números de volta para texto usando a chave correta.
+            </div>
+            
+            <div class="input-group">
+                <label for="numeros-decodificar">🔢 Números (separados por vírgula):</label>
+                <input type="text" id="numeros-decodificar" placeholder="22, 15, 22, 12, 16, 26">
+            </div>
+            
+            <div class="input-group">
+                <label for="chave-decodificar">🔑 Chave usada na codificação:</label>
+                <input type="number" id="chave-decodificar" min="-25" max="25" value="5" placeholder="5">
+            </div>
+            
+            <button id="btn-decodificar">🔍 Decodificar Números</button>
+            
+            <div id="result-decodificar" class="result"></div>
+        </div>
+
+        <!-- TAB 5: Consulta de Alfabeto -->
+        <div id="consulta" class="tab-content">
+            <h2>📊 Consulta de Alfabeto Deslocado</h2>
+            <div class="info-box">
+                <strong>ℹ️ Como funciona:</strong> Veja como fica o alfabeto com diferentes deslocamentos e consulte posições.
+            </div>
+            
+            <div class="input-group">
+                <label for="chave-consulta">🔑 Deslocamento (-25 a 25):</label>
+                <input type="number" id="chave-consulta" min="-25" max="25" value="3" placeholder="3">
+            </div>
+            
+            <button id="btn-gerar-alfabeto">📊 Gerar Alfabeto</button>
+            
+            <div id="result-consulta" class="result"></div>
+            
+            <div class="input-group" style="margin-top: 20px;">
+                <label for="letra-consulta">🔍 Consultar letra individual:</label>
+                <input type="text" id="letra-consulta" maxlength="1" placeholder="a">
+            </div>
+            
+            <button id="btn-consultar-letra">🔍 Consultar Letra</button>
+            
+            <div id="result-letra" class="result"></div>
+        </div>
+
+        </div> <!-- Fecha tab-container -->
+
+        <footer>
+            <p>
+                🔐 Cifra de César - Projeto Educacional<br>
+                <a href="https://github.com/Felipe-Alcantara/Cifra-de-cesar-em-python" target="_blank">
+                    Ver no GitHub
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script type="text/python">
+        from browser import document, alert
+
+        # Funções de manipulação de alfabeto
+        def deslocar_alfabeto(deslocamento):
+            alfabeto = 'abcdefghijklmnopqrstuvwxyz'
+            alfabeto_deslocado = alfabeto[deslocamento:] + alfabeto[:deslocamento]
+            return alfabeto_deslocado
+
+        # TAB 1: Cifrar Tradicional
+        def cifrar_mensagem(mensagem, alfabeto_deslocado):
+            alfabeto_original = 'abcdefghijklmnopqrstuvwxyz'
+            mensagem = mensagem.lower()
+            mensagem_cifrada = ''
+            
+            for caractere in mensagem:
+                if caractere.isalpha():
+                    indice = alfabeto_original.index(caractere)
+                    caractere_cifrado = alfabeto_deslocado[indice]
+                    mensagem_cifrada += caractere_cifrado
+                else:
+                    mensagem_cifrada += caractere
+            
+            return mensagem_cifrada
+
+        def on_cifrar(event):
+            mensagem = document['mensagem-cifrar'].value
+            try:
+                chave = int(document['chave-cifrar'].value)
+            except:
+                show_error('result-cifrar', '❌ Chave inválida! Use um número entre -25 e 25.')
+                return
+            
+            if not mensagem:
+                show_error('result-cifrar', '❌ Digite uma mensagem!')
+                return
+            
+            if chave < -25 or chave > 25:
+                show_error('result-cifrar', '❌ Chave deve estar entre -25 e 25!')
+                return
+            
+            alfabeto_deslocado = deslocar_alfabeto(chave)
+            mensagem_cifrada = cifrar_mensagem(mensagem, alfabeto_deslocado)
+            
+            result_html = f"""
+            <h3>✅ Resultado da Cifragem</h3>
+            <div class="alphabet-display">
+                <strong>Alfabeto original:</strong> abcdefghijklmnopqrstuvwxyz<br>
+                <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}
+            </div>
+            <div class="result-item"><strong>📝 Mensagem original:</strong> {mensagem}</div>
+            <div class="result-item"><strong>🔐 Mensagem cifrada:</strong> {mensagem_cifrada}</div>
+            <div class="result-item"><strong>🔑 Chave usada:</strong> {chave}</div>
+            """
+            
+            document['result-cifrar'].innerHTML = result_html
+            document['result-cifrar'].classList.add('show', 'success')
+            document['result-cifrar'].classList.remove('error')
+
+        # TAB 2: Decifrar Tradicional
+        def decifrar_mensagem(mensagem_cifrada, alfabeto_deslocado):
+            alfabeto_original = 'abcdefghijklmnopqrstuvwxyz'
+            mensagem_cifrada = mensagem_cifrada.lower()
+            mensagem_decifrada = ''
+            
+            for caractere in mensagem_cifrada:
+                if caractere.isalpha():
+                    indice_deslocado = alfabeto_deslocado.index(caractere)
+                    caractere_original = alfabeto_original[indice_deslocado]
+                    mensagem_decifrada += caractere_original
+                else:
+                    mensagem_decifrada += caractere
+            
+            return mensagem_decifrada
+
+        def on_decifrar(event):
+            mensagem = document['mensagem-decifrar'].value
+            try:
+                chave = int(document['chave-decifrar'].value)
+            except:
+                show_error('result-decifrar', '❌ Chave inválida!')
+                return
+            
+            if not mensagem:
+                show_error('result-decifrar', '❌ Digite uma mensagem cifrada!')
+                return
+            
+            alfabeto_deslocado = deslocar_alfabeto(chave)
+            mensagem_decifrada = decifrar_mensagem(mensagem, alfabeto_deslocado)
+            
+            result_html = f"""
+            <h3>✅ Resultado da Decifragem</h3>
+            <div class="alphabet-display">
+                <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}
+            </div>
+            <div class="result-item"><strong>🔐 Mensagem cifrada:</strong> {mensagem}</div>
+            <div class="result-item"><strong>✅ Mensagem decifrada:</strong> {mensagem_decifrada.upper()}</div>
+            <div class="result-item"><strong>🔑 Chave usada:</strong> {chave}</div>
+            """
+            
+            document['result-decifrar'].innerHTML = result_html
+            document['result-decifrar'].classList.add('show', 'success')
+            document['result-decifrar'].classList.remove('error')
+
+        # TAB 3: Codificar Numérico
+        def codificar_numerico(mensagem, alfabeto_deslocado):
+            mensagem = mensagem.lower()
+            numeros = []
+            mapeamento = {letra: str(i+1) for i, letra in enumerate(alfabeto_deslocado)}
+            
+            for letra in mensagem:
+                if letra.isalpha():
+                    numeros.append(mapeamento[letra])
+            
+            return numeros, mapeamento
+
+        def on_codificar(event):
+            mensagem = document['mensagem-codificar'].value
+            try:
+                chave = int(document['chave-codificar'].value)
+            except:
+                show_error('result-codificar', '❌ Chave inválida!')
+                return
+            
+            if not mensagem:
+                show_error('result-codificar', '❌ Digite uma mensagem!')
+                return
+            
+            alfabeto_deslocado = deslocar_alfabeto(chave)
+            numeros, mapeamento = codificar_numerico(mensagem, alfabeto_deslocado)
+            
+            # Criar visualização do mapeamento
+            map_display = '<br>'.join([f"{k} → {v}" for k, v in list(mapeamento.items())[:10]]) + '<br>...'
+            
+            result_html = f"""
+            <h3>✅ Mensagem Codificada</h3>
+            <div class="alphabet-display">
+                <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}
+            </div>
+            <div class="result-item"><strong>📝 Mensagem original:</strong> {mensagem}</div>
+            <div class="result-item"><strong>🔢 Mensagem em números:</strong> [{', '.join(numeros)}]</div>
+            <div class="result-item"><strong>🔑 Chave usada:</strong> {chave}</div>
+            <div class="info-box">
+                <strong>📖 Mapeamento (primeiras 10 letras):</strong><br>
+                {map_display}
+            </div>
+            """
+            
+            document['result-codificar'].innerHTML = result_html
+            document['result-codificar'].classList.add('show', 'success')
+            document['result-codificar'].classList.remove('error')
+
+        # TAB 4: Decodificar Numérico
+        def decodificar_numerico(numeros, alfabeto_deslocado):
+            mapeamento_inverso = {i+1: letra for i, letra in enumerate(alfabeto_deslocado)}
+            letras = [mapeamento_inverso[num] for num in numeros]
+            return ''.join(letras)
+
+        def on_decodificar(event):
+            numeros_str = document['numeros-decodificar'].value
+            try:
+                chave = int(document['chave-decodificar'].value)
+            except:
+                show_error('result-decodificar', '❌ Chave inválida!')
+                return
+            
+            if not numeros_str:
+                show_error('result-decodificar', '❌ Digite os números!')
+                return
+            
+            try:
+                numeros = [int(n.strip()) for n in numeros_str.split(',')]
+            except:
+                show_error('result-decodificar', '❌ Formato inválido! Use números separados por vírgula.')
+                return
+            
+            alfabeto_deslocado = deslocar_alfabeto(chave)
+            mensagem_decifrada = decodificar_numerico(numeros, alfabeto_deslocado)
+            
+            result_html = f"""
+            <h3>✅ Mensagem Decodificada</h3>
+            <div class="alphabet-display">
+                <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}
+            </div>
+            <div class="result-item"><strong>🔢 Números recebidos:</strong> [{', '.join(map(str, numeros))}]</div>
+            <div class="result-item"><strong>✅ Mensagem decodificada:</strong> {mensagem_decifrada.upper()}</div>
+            <div class="result-item"><strong>🔑 Chave usada:</strong> {chave}</div>
+            """
+            
+            document['result-decodificar'].innerHTML = result_html
+            document['result-decodificar'].classList.add('show', 'success')
+            document['result-decodificar'].classList.remove('error')
+
+        # TAB 5: Consulta de Alfabeto
+        def on_gerar_alfabeto(event):
+            try:
+                chave = int(document['chave-consulta'].value)
+            except:
+                show_error('result-consulta', '❌ Chave inválida!')
+                return
+            
+            alfabeto_original = 'abcdefghijklmnopqrstuvwxyz'
+            alfabeto_deslocado = deslocar_alfabeto(chave)
+            mapeamento = {letra: str(i+1) for i, letra in enumerate(alfabeto_deslocado)}
+            
+            # Criar tabela de mapeamento
+            map_rows = ''
+            for i in range(0, 26, 5):
+                row_items = [f"{alfabeto_deslocado[j]} → {j+1}" for j in range(i, min(i+5, 26))]
+                map_rows += '<div class="result-item">' + ' | '.join(row_items) + '</div>'
+            
+            result_html = f"""
+            <h3>📊 Alfabeto Gerado</h3>
+            <div class="alphabet-display">
+                <strong>Alfabeto original:</strong> {alfabeto_original}<br>
+                <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}<br>
+                <strong>Deslocamento:</strong> {chave} posições
+            </div>
+            <h4>🔢 Mapeamento Completo (letra → número):</h4>
+            {map_rows}
+            """
+            
+            document['result-consulta'].innerHTML = result_html
+            document['result-consulta'].classList.add('show', 'success')
+            document['result-consulta'].classList.remove('error')
+
+        def on_consultar_letra(event):
+            letra = document['letra-consulta'].value.lower()
+            try:
+                chave = int(document['chave-consulta'].value)
+            except:
+                show_error('result-letra', '❌ Primeiro gere o alfabeto!')
+                return
+            
+            if not letra or not letra.isalpha():
+                show_error('result-letra', '❌ Digite uma letra válida (a-z)!')
+                return
+            
+            alfabeto_deslocado = deslocar_alfabeto(chave)
+            posicao = alfabeto_deslocado.index(letra) + 1
+            
+            result_html = f"""
+            <h3>✅ Consulta de Letra</h3>
+            <div class="result-item"><strong>🔤 Letra consultada:</strong> {letra.upper()}</div>
+            <div class="result-item"><strong>🔢 Posição numérica:</strong> {posicao}</div>
+            <div class="result-item"><strong>🔑 Deslocamento usado:</strong> {chave}</div>
+            """
+            
+            document['result-letra'].innerHTML = result_html
+            document['result-letra'].classList.add('show', 'success')
+            document['result-letra'].classList.remove('error')
+
+        # Função auxiliar para mostrar erros
+        def show_error(element_id, message):
+            document[element_id].innerHTML = f'<h3>{message}</h3>'
+            document[element_id].classList.add('show', 'error')
+            document[element_id].classList.remove('success')
+
+        # Bind eventos
+        document['btn-cifrar'].bind('click', on_cifrar)
+        document['btn-decifrar'].bind('click', on_decifrar)
+        document['btn-codificar'].bind('click', on_codificar)
+        document['btn-decodificar'].bind('click', on_decodificar)
+        document['btn-gerar-alfabeto'].bind('click', on_gerar_alfabeto)
+        document['btn-consultar-letra'].bind('click', on_consultar_letra)
+
+    </script>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Set active button
+            event.target.closest('.tab-button').classList.add('active');
+        }
+    </script>
+</body>
+</html>

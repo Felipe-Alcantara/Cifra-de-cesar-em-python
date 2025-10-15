@@ -1,8 +1,30 @@
 # 📁 Pasta `docs/` - Documentação
 
-Esta pasta contém toda a documentação e guias do projeto.
+Esta pasta contém toda a documentação e guias do projeto, incluindo uma interface web interativa.
 
 ## 📄 Arquivos
+
+### 🌐 `index.html` ⭐ NOVO!
+**Descrição:** Interface web completa com Brython  
+**Conteúdo:**
+- Interface visual bonita e responsiva
+- Todas as 5 funcionalidades do projeto em uma única página
+- Não precisa instalar Python - roda direto no navegador!
+- Design moderno com gradientes e animações
+
+**Funcionalidades:**
+1. 🔐 **Cifrar Tradicional** - Criptografa texto em texto cifrado
+2. 🔓 **Decifrar Tradicional** - Decifra texto cifrado
+3. 🔢 **Codificar Numérico** - Converte texto em números
+4. 🔍 **Decodificar Numérico** - Converte números em texto
+5. 📊 **Consulta de Alfabeto** - Visualiza alfabeto deslocado
+
+**Como usar:**
+- Abra o arquivo `index.html` em qualquer navegador moderno
+- Não precisa servidor - funciona offline!
+- Navegue pelas abas para usar cada funcionalidade
+
+---
 
 ### 📖 `GUIA_DESCRIPTOGRAFIA.txt`
 **Descrição:** Guia completo sobre como decifrar mensagens  

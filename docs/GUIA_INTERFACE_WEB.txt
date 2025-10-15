@@ -1,0 +1,237 @@
+# 🌐 INTERFACE WEB - GUIA DE USO
+
+## ✨ O que é?
+
+Uma interface web completa e interativa para usar todas as funcionalidades
+da Cifra de César diretamente no navegador!
+
+## 🚀 Como Usar
+
+### Método 1: Abrir Localmente
+```
+1. Navegue até a pasta docs/
+2. Clique duas vezes em index.html
+3. Abre automaticamente no seu navegador padrão
+```
+
+### Método 2: Via Linha de Comando
+```bash
+# Windows
+start docs/index.html
+
+# Linux
+xdg-open docs/index.html
+
+# Mac
+open docs/index.html
+```
+
+## 📋 Funcionalidades Disponíveis
+
+### 🔐 1. Cifrar Tradicional
+- Digite uma mensagem
+- Escolha uma chave (deslocamento)
+- Clique em "Cifrar Mensagem"
+- Receba o texto cifrado
+
+**Exemplo:**
+```
+Mensagem: hello
+Chave: 3
+Resultado: khoor
+```
+
+### 🔓 2. Decifrar Tradicional
+- Cole a mensagem cifrada
+- Digite a chave usada na cifragem
+- Clique em "Decifrar Mensagem"
+- Veja o texto original
+
+**Exemplo:**
+```
+Cifrada: khoor
+Chave: 3
+Resultado: HELLO
+```
+
+### 🔢 3. Codificar em Números
+- Digite uma mensagem
+- Escolha uma chave
+- Clique em "Codificar em Números"
+- Receba a sequência numérica
+
+**Exemplo:**
+```
+Mensagem: ataque
+Chave: 5
+Resultado: [22, 15, 22, 12, 16, 26]
+```
+
+### 🔍 4. Decodificar Números
+- Cole os números (separados por vírgula)
+- Digite a chave usada
+- Clique em "Decodificar Números"
+- Veja a mensagem original
+
+**Exemplo:**
+```
+Números: 22, 15, 22, 12, 16, 26
+Chave: 5
+Resultado: ATAQUE
+```
+
+### 📊 5. Consulta de Alfabeto
+- Digite um deslocamento
+- Clique em "Gerar Alfabeto"
+- Veja o alfabeto deslocado completo
+- Consulte letras individuais
+
+**Exemplo:**
+```
+Deslocamento: 3
+Alfabeto: defghijklmnopqrstuvwxyzabc
+
+Consultar: h → Posição 5
+```
+
+## 💡 Dicas de Uso
+
+### ✅ Boas Práticas
+- Use apenas letras sem acentos (a-z)
+- Mantenha a chave entre -25 e 25
+- Anote a chave para poder decifrar depois
+- Teste com exemplos simples primeiro
+
+### ⚠️ Limitações
+- Não suporta caracteres acentuados (á, é, í, ó, ú)
+- Espaços e pontuação são mantidos na cifra tradicional
+- Espaços são removidos na cifra numérica
+
+### 🎨 Interface
+- **Design responsivo** - Funciona em celular e desktop
+- **Animações suaves** - Feedback visual agradável
+- **5 abas** - Uma para cada funcionalidade
+- **Cores** - Gradiente roxo moderno
+- **Emojis** - Facilitam identificação visual
+
+## 🔧 Tecnologias Usadas
+
+- **HTML5** - Estrutura da página
+- **CSS3** - Design e animações
+- **Brython** - Python no navegador!
+- **JavaScript** - Navegação entre abas
+
+## 📱 Compatibilidade
+
+✅ **Navegadores Suportados:**
+- Chrome/Edge (recomendado)
+- Firefox
+- Safari
+- Opera
+
+✅ **Dispositivos:**
+- Desktop
+- Tablet
+- Smartphone
+
+## 🎯 Vantagens
+
+### Sobre os Programas Python
+- ✅ Não precisa instalar Python
+- ✅ Interface visual bonita
+- ✅ Todas as funções em um lugar
+- ✅ Funciona offline
+- ✅ Fácil de compartilhar
+
+### Quando Usar
+- 📱 **Interface Web:** Uso rápido e visual
+- 💻 **Programas Python:** Automação e scripts
+
+## 🚀 Próximos Passos
+
+### Para Desenvolvedores
+1. O código Python está embutido na página HTML
+2. Usa Brython para executar Python no navegador
+3. Fácil de modificar e personalizar
+4. Adicione novas funcionalidades nas abas
+
+### Publicar Online
+Para disponibilizar na internet:
+
+1. **GitHub Pages** (Grátis)
+   ```bash
+   # Já está pronto! Só ativar no GitHub
+   Settings → Pages → Source: main → Folder: /docs
+   ```
+
+2. **Netlify/Vercel** (Grátis)
+   - Arraste a pasta docs/ para o site
+   - URL gerada automaticamente
+
+3. **Hospedagem Própria**
+   - Upload via FTP
+   - Qualquer servidor HTTP serve
+
+## 📖 Exemplos Práticos
+
+### Cenário 1: Enviar Mensagem Secreta
+```
+1. Abra a aba "Cifrar Tradicional"
+2. Digite: "reuniao hoje as 3"
+3. Chave: 7
+4. Copie o resultado cifrado
+5. Envie para seu amigo
+6. Compartilhe a chave 7 separadamente
+```
+
+### Cenário 2: Receber Mensagem
+```
+1. Abra a aba "Decifrar Tradicional"
+2. Cole a mensagem cifrada recebida
+3. Digite a chave que seu amigo compartilhou
+4. Clique em decifrar
+5. Veja a mensagem original!
+```
+
+### Cenário 3: Código Numérico
+```
+1. Abra "Codificar em Números"
+2. Digite sua mensagem
+3. Escolha uma chave
+4. Envie os números
+5. Amigo usa "Decodificar Números" com a mesma chave
+```
+
+## 🎓 Para Aprender
+
+### Experimente:
+- Teste diferentes chaves
+- Compare cifra tradicional vs numérica
+- Use a consulta de alfabeto para entender o processo
+- Tente decifrar sem saber a chave (força bruta)
+
+## 🆘 Solução de Problemas
+
+### Problema: Página não abre
+- **Solução:** Verifique se tem um navegador instalado
+
+### Problema: Nada acontece ao clicar
+- **Solução:** Aguarde carregar o Brython (CDN)
+- **Alternativa:** Verifique conexão com internet
+
+### Problema: Caracteres estranhos
+- **Solução:** Não use acentos, apenas a-z
+
+### Problema: Números não decodificam
+- **Solução:** Use vírgula entre números: 1, 2, 3
+
+## 📞 Suporte
+
+Problemas? Sugestões?
+- Abra uma issue no GitHub
+- Veja a documentação em docs/GUIA_DESCRIPTOGRAFIA.txt
+- Teste os programas Python para comparar
+
+---
+
+✨ **Divirta-se criptografando!** 🔐

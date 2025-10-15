@@ -6,6 +6,13 @@ Um projeto completo de criptografia usando a Cifra de César, incluindo convers�
 
 Este projeto implementa a **Cifra de César**, um tipo clássico de cifra de substituição usada para criptografia de texto. Além da implementação tradicional, o projeto inclui várias ferramentas adicionais para codificação numérica, descriptografia e demonstrações educacionais.
 
+### ✨ **NOVO: Interface Web Interativa!**
+🌐 Agora você pode usar todas as funcionalidades diretamente no navegador, sem instalar Python!
+- Abra `docs/index.html` em qualquer navegador
+- Interface visual moderna e responsiva
+- Todas as 5 funcionalidades em uma única página
+- Funciona offline!
+
 ## 📁 Estrutura do Projeto
 
 ```
@@ -92,13 +99,32 @@ Cifra-de-cesar-em-python/
 
 ### 📖 Documentação (`docs/`)
 
+- **`index.html`**: Interface web completa (use no navegador!) 🌐 **NOVO!**
+- **`GUIA_INTERFACE_WEB.txt`**: Como usar a interface web **NOVO!**
 - **`GUIA_DESCRIPTOGRAFIA.txt`**: Guia completo sobre como decifrar mensagens
 
 📖 [Ver documentação detalhada](docs/README.md)
 
 ## 🎯 Como Usar
 
-### Instalação
+### Opção 1: Interface Web (Recomendado para iniciantes) 🌐
+
+```bash
+# Abra o arquivo HTML em qualquer navegador
+docs/index.html
+```
+
+**Vantagens:**
+- ✅ Não precisa instalar Python
+- ✅ Interface visual bonita
+- ✅ Todas as funções em um lugar
+- ✅ Funciona em qualquer dispositivo
+
+---
+
+### Opção 2: Programas Python (Para desenvolvedores)
+
+#### Instalação
 
 ```bash
 # Clone o repositório
@@ -130,11 +156,22 @@ python demos/demo_processo_completo.py
 ## 📚 Guia Rápido
 
 ### Para Iniciantes
+1. **Abra a interface web** `docs/index.html` no navegador
+2. Escolha uma das 5 abas (Cifrar, Decifrar, Codificar, etc.)
+3. Siga as instruções na tela
+4. Experimente com exemplos simples primeiro!
+
+### Para Desenvolvedores Python
 1. Execute `demos/demo_processo_completo.py` para entender o conceito
 2. Leia `docs/GUIA_DESCRIPTOGRAFIA.txt` para aprender a decifrar
 3. Pratique com os exemplos em `demos/EXEMPLOS_MENSAGENS_CIFRADAS.txt`
 
 ### Para Uso Prático
+
+**Interface Web:**
+- Abra `docs/index.html` para acesso rápido e visual
+
+**Programas Python:**
 - **Criptografar texto simples:** Use `src/cifra_tradicional/cifra_cesar_completa.py`
 - **Criar código numérico:** Use `src/cifra_numerica/codificador_decodificador_numerico.py`
 - **Decifrar código recebido:** Use `src/cifra_numerica/decodificador_mensagem_numerica.py`

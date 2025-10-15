@@ -15,16 +15,23 @@ src/
 
 ### 🔐 `cifra_tradicional/`
 **Contém:** Cifra de César clássica (texto → texto cifrado)  
-**Arquivo:** `cifra_cesar_completa.py`
+**Arquivos:** 
+- `cifra_cesar_completa.py` - Criptografa mensagens
+- `decodificador_cifra_tradicional.py` - Decifra mensagens
 
 **Características:**
-- Criptografa texto usando deslocamento alfabético
+- Criptografa e decifra texto usando deslocamento alfabético
 - Mantém formato de texto (letras cifradas)
 - Ideal para aprender conceitos básicos
+- Processo reversível com a mesma chave
 
 **Como usar:**
 ```bash
+# Criptografar
 python src/cifra_tradicional/cifra_cesar_completa.py
+
+# Decifrar
+python src/cifra_tradicional/decodificador_cifra_tradicional.py
 ```
 
 📖 **[Leia o README completo](cifra_tradicional/README.md)**
@@ -79,18 +86,21 @@ python src/ferramentas/deslocamento_alfabeto_interativo.py
 
 | Objetivo | Pasta/Arquivo |
 |----------|---------------|
-| Criptografar texto simples | `cifra_tradicional/cifra_cesar_completa.py` |
+| Criptografar texto | `cifra_tradicional/cifra_cesar_completa.py` |
+| Decifrar texto cifrado | `cifra_tradicional/decodificador_cifra_tradicional.py` |
 | Converter texto em números | `cifra_numerica/codificador_decodificador_numerico.py` |
 | Decifrar números recebidos | `cifra_numerica/decodificador_mensagem_numerica.py` |
 | Consultar alfabeto deslocado | `ferramentas/deslocamento_alfabeto_interativo.py` |
 
 ## 🔄 Fluxo de Trabalho por Tipo
 
-### Cifra Tradicional (Texto → Texto)
+### Cifra Tradicional (Texto → Texto → Texto)
 ```
 Mensagem: "ataque"
-    ↓ [cifra_tradicional/]
+    ↓ [cifra_tradicional/cifra_cesar_completa.py]
 Cifrado: "fyfvzj"
+    ↓ [cifra_tradicional/decodificador_cifra_tradicional.py]
+Decifrado: "ataque"
 ```
 
 ### Cifra Numérica (Texto → Números → Texto)

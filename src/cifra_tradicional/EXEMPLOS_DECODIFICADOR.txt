@@ -1,0 +1,102 @@
+# ===================================================================
+#  EXEMPLOS DE USO: DECODIFICADOR DE CIFRA TRADICIONAL
+# ===================================================================
+#
+# Use este guia para testar o decodificador_cifra_tradicional.py
+#
+# ===================================================================
+
+"""
+EXEMPLO 1 - Deslocamento Positivo
+----------------------------------
+Mensagem cifrada: khoor
+Chave (deslocamento): 3
+
+Resposta esperada: hello
+"""
+
+"""
+EXEMPLO 2 - Deslocamento com Espaços
+-------------------------------------
+Mensagem cifrada: fyfvzj fs fqfsmjhjw
+Chave (deslocamento): 5
+
+Resposta esperada: ataque ao amanhecer
+"""
+
+"""
+EXEMPLO 3 - Deslocamento Maior
+-------------------------------
+Mensagem cifrada: hahtxl hv hthualoly
+Chave (deslocamento): 7
+
+Resposta esperada: ataque ao amanhecer
+"""
+
+"""
+EXEMPLO 4 - Deslocamento Negativo
+----------------------------------
+Mensagem cifrada: xqqxzb xr xjxkebo bo
+Chave (deslocamento): -3
+
+Resposta esperada: ataque ao amanhecer
+"""
+
+"""
+EXEMPLO 5 - Mensagem Complexa
+------------------------------
+Mensagem cifrada: j wjw s rjhfif ij hjfx
+Chave (deslocamento): 5
+
+Resposta esperada: e rer n mehada de cesar
+"""
+
+"""
+EXEMPLO 6 - Deslocamento 13 (ROT13)
+------------------------------------
+Mensagem cifrada: uryyb jbeyq
+Chave (deslocamento): 13
+
+Resposta esperada: hello world
+"""
+
+"""
+EXEMPLO 7 - Frase Longa
+-----------------------
+Mensagem cifrada: shjwdslwthdwtx jxyt ufwt fuwjsijw hwdustlwtklf
+Chave (deslocamento): 5
+
+Resposta esperada: programacao esta para aprender criptografia
+"""
+
+# ===================================================================
+#  COMO USAR
+# ===================================================================
+"""
+1. Execute: python src/cifra_tradicional/decodificador_cifra_tradicional.py
+2. Copie a mensagem cifrada de um exemplo acima
+3. Digite a chave correspondente
+4. Verifique se o resultado corresponde à resposta esperada
+"""
+
+# ===================================================================
+#  TESTE VOCÊ MESMO!
+# ===================================================================
+"""
+Use o cifra_cesar_completa.py para criar suas próprias mensagens:
+
+1. Criptografe uma mensagem com uma chave escolhida
+2. Copie a mensagem cifrada
+3. Use o decodificador com a mesma chave
+4. Confirme que recuperou a mensagem original!
+"""
+
+# ===================================================================
+#  DICAS
+# ===================================================================
+"""
+✓ A chave deve ser exatamente a mesma usada na criptografia
+✓ Deslocamento positivo e negativo funcionam de forma diferente
+✓ Espaços e pontuação são mantidos
+✓ Não use acentos (limitação do alfabeto)
+"""

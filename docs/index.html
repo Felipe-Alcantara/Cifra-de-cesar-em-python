@@ -7,6 +7,60 @@
     <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython_stdlib.js"></script>
     <style>
+        :root {
+            /* Light Mode Colors */
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-result: #333;
+            --bg-container: rgba(255, 255, 255, 0.95);
+            --bg-container-gradient: rgba(248, 249, 252, 0.95);
+            --bg-tab-button: rgba(255, 255, 255, 0.8);
+            --bg-tab-active: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-tab-content: rgba(255, 255, 255, 0.6);
+            --bg-input: white;
+            --border-color: #ddd;
+            --border-focus: #667eea;
+            --bg-result: white;
+            --bg-result-item: #f8f9fa;
+            --bg-info: #e3f2fd;
+            --border-info: #2196f3;
+            --text-info-strong: #1976d2;
+            --bg-alphabet: white;
+            --text-alphabet: #333;
+            --shadow-main: rgba(0, 0, 0, 0.2);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --border-result: #e0e0e0;
+        }
+
+        body.dark-mode {
+            /* Dark Mode Colors - ULTRA DARK */
+            --bg-gradient-start: #0a0a15;
+            --bg-gradient-end: #12121f;
+            --text-primary: #a0a0b0;
+            --text-secondary: #808090;
+            --text-result: #888898;
+            --bg-container: rgba(15, 15, 22, 0.95);
+            --bg-container-gradient: rgba(12, 12, 18, 0.95);
+            --bg-tab-button: rgba(30, 30, 42, 0.85);
+            --bg-tab-active: linear-gradient(135deg, #3a4fc8 0%, #4a2d7a 100%);
+            --bg-tab-content: rgba(20, 20, 32, 0.6);
+            --bg-input: #141420;
+            --border-color: #2a2a38;
+            --border-focus: #4a5fc8;
+            --bg-result: #08080f;
+            --bg-result-item: #101018;
+            --bg-info: #0c0c16;
+            --border-info: #2a4fc8;
+            --text-info-strong: #4a7fc8;
+            --bg-alphabet: #0a0a12;
+            --text-alphabet: #7a7a90;
+            --shadow-main: rgba(0, 0, 0, 0.9);
+            --shadow-light: rgba(0, 0, 0, 0.7);
+            --border-result: #1a1a28;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,10 +69,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             min-height: 100vh;
             padding: 20px;
-            color: #333;
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -31,6 +86,27 @@
             color: white;
             margin-bottom: 40px;
             animation: fadeInDown 0.8s ease-out;
+            position: relative;
+        }
+
+        .dark-mode-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
 
         header h1 {
@@ -53,28 +129,30 @@
         }
 
         .tab-container {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 252, 0.95) 100%);
+            background: var(--bg-container);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px var(--shadow-main);
             animation: fadeInDown 1s ease-out;
             border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
         .tab-button {
             flex: 1;
             min-width: 200px;
             padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
+            background: var(--bg-tab-button);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-bottom: none;
             border-radius: 15px;
             cursor: pointer;
             font-size: 1em;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            color: #333;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            color: var(--text-primary);
         }
 
         .tab-button:hover {
@@ -84,7 +162,7 @@
         }
 
         .tab-button.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-tab-active);
             color: white;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
             transform: scale(1.05);
@@ -92,12 +170,13 @@
 
         .tab-content {
             display: none;
-            background: rgba(102, 126, 234, 0.05);
+            background: var(--bg-tab-content);
             padding: 30px;
             border-radius: 15px;
             margin-top: 20px;
             animation: fadeIn 0.5s ease-out;
             border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: background 0.3s ease;
         }
 
         .tab-content.active {
@@ -112,7 +191,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #555;
+            color: var(--text-secondary);
             font-size: 1.1em;
         }
 
@@ -121,18 +200,20 @@
         textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #ddd;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 1em;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, background 0.3s;
             font-family: inherit;
+            background: var(--bg-input);
+            color: var(--text-primary);
         }
 
         input[type="text"]:focus,
         input[type="number"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--border-focus);
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
@@ -179,11 +260,21 @@
         .result {
             margin-top: 30px;
             padding: 20px;
-            background: #f8f9fa;
+            background: var(--bg-result);
+            border: 2px solid var(--border-result);
             border-left: 4px solid #667eea;
             border-radius: 8px;
             display: none;
             animation: slideIn 0.5s ease-out;
+            transition: all 0.3s ease;
+            color: var(--text-result);
+            box-shadow: 0 4px 15px var(--shadow-light);
+        }
+
+        body.dark-mode .result {
+            background: #0a0a14;
+            border: 1px solid #1a1a28;
+            border-left: 3px solid #4a5fd8;
         }
 
         .result.show {
@@ -196,18 +287,33 @@
             font-size: 1.3em;
         }
 
+        body.dark-mode .result h3 {
+            color: #5a7fd8;
+        }
+
         .result-item {
             margin: 10px 0;
-            padding: 10px;
-            background: white;
-            border-radius: 5px;
+            padding: 12px 15px;
+            background: var(--bg-result-item);
+            border: 1px solid var(--border-result);
+            border-radius: 6px;
             font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+            color: var(--text-result);
+            box-shadow: 0 2px 5px var(--shadow-light);
+        }
+
+        .result-item:hover {
+            transform: translateX(2px);
+            box-shadow: 0 4px 8px var(--shadow-light);
         }
 
         .result-item strong {
-            color: #555;
-            display: inline-block;
-            min-width: 200px;
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-item strong {
+            color: #8888a8;
         }
 
         .grid-2 {
@@ -274,25 +380,39 @@
         }
 
         .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
+            background: var(--bg-info);
+            border: 2px solid var(--border-result);
+            border-left: 4px solid var(--border-info);
             padding: 15px;
             margin: 20px 0;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px var(--shadow-light);
+            transition: all 0.3s ease;
         }
 
         .info-box strong {
-            color: #1976d2;
+            color: var(--text-info-strong);
         }
 
         .alphabet-display {
             font-family: 'Courier New', monospace;
-            background: white;
+            background: var(--bg-alphabet);
+            color: var(--text-alphabet);
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             margin: 15px 0;
-            border: 2px solid #667eea;
+            border: 2px solid var(--border-result);
+            box-shadow: 0 3px 10px var(--shadow-light);
             overflow-x: auto;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .alphabet-display {
+            border-color: #3a3a5a;
+        }
+
+        .alphabet-display strong {
+            color: var(--text-alphabet);
         }
 
         @keyframes fadeIn {
@@ -353,6 +473,9 @@
 <body onload="brython()">
     <div class="container">
         <header>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()" id="darkModeToggle">
+                🌙 Dark Mode
+            </button>
             <h1>🔐 Cifra de César</h1>
             <p>Interface Web Interativa - Criptografe e Decifre Mensagens</p>
         </header>
@@ -820,6 +943,28 @@
     </script>
 
     <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            // Salva preferência no localStorage
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            
+            // Atualiza texto do botão
+            const toggleBtn = document.getElementById('darkModeToggle');
+            toggleBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        }
+
+        // Carrega preferência salva ao carregar página
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').textContent = '☀️ Light Mode';
+            }
+        });
+
         function showTab(tabId) {
             // Hide all tabs
             const tabs = document.querySelectorAll('.tab-content');

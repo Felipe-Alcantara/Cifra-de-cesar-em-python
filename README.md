@@ -148,6 +148,28 @@ docs/index.html
 
 ---
 
+## 📚 Documentação Completa Disponível
+
+Este projeto contém **documentação extensa** distribuída por todo o repositório:
+
+### 📖 Guias e Tutoriais
+- **`README.md`** em cada pasta - Documentação específica de cada módulo
+- **`docs/GUIA_DESCRIPTOGRAFIA.txt`** - Como decifrar mensagens passo a passo
+- **`docs/GUIA_INTERFACE_WEB.txt`** - Tutorial completo da interface web
+- **`docs/SUPORTE_ACENTOS.md`** - Detalhes sobre normalização de caracteres
+
+### 🎯 Exemplos Práticos
+- **`demos/EXEMPLOS_MENSAGENS_CIFRADAS.txt`** - 7 exemplos reais para praticar
+- **`demos/demo_processo_completo.py`** - Demonstração interativa completa
+
+### 📋 Arquivos de Organização
+- **`ESTRUTURA_DO_PROJETO.txt`** - Visão geral da estrutura
+- **`ORGANIZACAO_SUBPASTAS.txt`** - Detalhes de organização interna
+
+**💡 Dica:** Explore os arquivos `README.md` em `src/cifra_tradicional/`, `src/cifra_numerica/`, `src/ferramentas/` e `demos/` para documentação detalhada de cada ferramenta!
+
+---
+
 ### Opção 2: Programas Python (Para desenvolvedores)
 
 #### Instalação

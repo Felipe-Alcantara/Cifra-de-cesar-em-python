@@ -1,5 +1,5 @@
 ╔══════════════════════════════════════════════════════════════╗
-║         ORGANIZAÇÃO FINAL - SUBPASTAS EM SRC/               ║
+║         ORGANIZAÇÃO FINAL - SUBPASTAS EM SRC/                ║
 ║              Cifra de César em Python                        ║
 ╚══════════════════════════════════════════════════════════════╝
 

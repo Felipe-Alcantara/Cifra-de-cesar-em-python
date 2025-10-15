@@ -6,11 +6,15 @@ Um projeto completo de criptografia usando a Cifra de César, incluindo convers�
 
 Este projeto implementa a **Cifra de César**, um tipo clássico de cifra de substituição usada para criptografia de texto. Além da implementação tradicional, o projeto inclui várias ferramentas adicionais para codificação numérica, descriptografia e demonstrações educacionais.
 
-### ✨ **NOVO: Interface Web Interativa!**
+### ✨ **NOVO: Interface Web Interativa com Dark Mode!**
 🌐 Agora você pode usar todas as funcionalidades diretamente no navegador, sem instalar Python!
 - Abra `docs/index.html` em qualquer navegador
-- Interface visual moderna e responsiva
+- Interface visual moderna e responsiva com **Dark Mode** 🌙
 - Todas as 5 funcionalidades em uma única página
+- **Suporte completo a acentos e caracteres especiais** (á, é, ç, ã, etc.)
+- Botões rápidos para copiar mensagens entre abas
+- Toast notifications para feedback visual
+- Layout otimizado para mobile
 - Funciona offline!
 
 ## 📁 Estrutura do Projeto
@@ -21,6 +25,7 @@ Cifra-de-cesar-em-python/
 ├── 📁 src/                    # Programas principais
 │   ├── 📁 cifra_tradicional/  # Cifra César clássica
 │   │   ├── cifra_cesar_completa.py
+│   │   ├── decodificador_cifra_tradicional.py
 │   │   └── README.md
 │   │
 │   ├── 📁 cifra_numerica/     # Cifra numérica
@@ -30,6 +35,7 @@ Cifra-de-cesar-em-python/
 │   │
 │   ├── 📁 ferramentas/        # Utilitários
 │   │   ├── deslocamento_alfabeto_interativo.py
+│   │   ├── utils_normalizacao.py
 │   │   └── README.md
 │   │
 │   └── README.md
@@ -39,8 +45,11 @@ Cifra-de-cesar-em-python/
 │   ├── EXEMPLOS_MENSAGENS_CIFRADAS.txt
 │   └── README.md
 │
-├── 📁 docs/                   # Documentação
+├── 📁 docs/                   # Documentação e Interface Web
+│   ├── index.html             # Interface web interativa
 │   ├── GUIA_DESCRIPTOGRAFIA.txt
+│   ├── GUIA_INTERFACE_WEB.txt
+│   ├── SUPORTE_ACENTOS.md
 │   └── README.md
 │
 ├── README.md                  # Este arquivo
@@ -55,7 +64,14 @@ Cifra-de-cesar-em-python/
 **`cifra_cesar_completa.py`**
 - Criptografa mensagens de texto usando deslocamento alfabético
 - Cifra de César tradicional (texto → texto cifrado)
+- Suporte a acentos e caracteres especiais
 - Exemplo: "hello" → "khoor" (deslocamento 3)
+
+**`decodificador_cifra_tradicional.py`**
+- Decifra mensagens cifradas quando você tem a chave
+- Reverte o processo de cifragem
+- Suporte a acentos e caracteres especiais
+- Exemplo: "khoor" → "hello" (chave 3)
 
 📖 [Ver documentação detalhada](src/cifra_tradicional/README.md)
 
@@ -84,6 +100,12 @@ Cifra-de-cesar-em-python/
 - Útil para aprendizado e debugging
 - Modo contínuo para múltiplas consultas
 
+**`utils_normalizacao.py`**
+- Biblioteca de normalização de caracteres especiais
+- Converte acentos automaticamente (á→a, ç→c, ã→a, etc.)
+- Usada por todos os programas do projeto
+- Função `normalizar_texto()` e `mostrar_conversoes()`
+
 📖 [Ver documentação detalhada](src/ferramentas/README.md)
 
 ---
@@ -99,8 +121,9 @@ Cifra-de-cesar-em-python/
 
 ### 📖 Documentação (`docs/`)
 
-- **`index.html`**: Interface web completa (use no navegador!) 🌐 **NOVO!**
+- **`index.html`**: Interface web completa com dark mode 🌐 **NOVO!**
 - **`GUIA_INTERFACE_WEB.txt`**: Como usar a interface web **NOVO!**
+- **`SUPORTE_ACENTOS.md`**: Documentação sobre suporte a acentos **NOVO!**
 - **`GUIA_DESCRIPTOGRAFIA.txt`**: Guia completo sobre como decifrar mensagens
 
 📖 [Ver documentação detalhada](docs/README.md)
@@ -116,9 +139,12 @@ docs/index.html
 
 **Vantagens:**
 - ✅ Não precisa instalar Python
-- ✅ Interface visual bonita
+- ✅ Interface visual bonita com Dark Mode 🌙
 - ✅ Todas as funções em um lugar
-- ✅ Funciona em qualquer dispositivo
+- ✅ Suporte completo a acentos (á, é, ç, ã, etc.)
+- ✅ Botões rápidos para copiar entre abas
+- ✅ Toast notifications para feedback
+- ✅ Funciona em qualquer dispositivo (responsivo)
 
 ---
 
@@ -182,27 +208,43 @@ python demos/demo_processo_completo.py
 
 - **`deslocar_alfabeto(deslocamento)`**: Desloca o alfabeto por N posições
 - **`cifrar_mensagem(mensagem, alfabeto_deslocado)`**: Criptografa texto usando alfabeto deslocado
+- **`decifrar_mensagem(mensagem_cifrada, chave)`**: Descriptografa texto cifrado
 - **`numerar(alfabeto_deslocado)`**: Cria mapeamento letra → número
 - **`criar_mapeamento_inverso()`**: Cria mapeamento número → letra para descriptografia
+- **`normalizar_texto(texto)`**: Converte acentos e caracteres especiais
+
+### Recursos da Interface Web
+
+- **Dark/Light Mode**: Alterna entre temas claro e escuro com persistência
+- **Copiar para Decifrar**: Botões rápidos para transferir mensagens entre abas
+- **Toast Notifications**: Feedback visual elegante para ações do usuário
+- **Layout Responsivo**: Otimizado para desktop, tablet e mobile
+- **Validação em Tempo Real**: Feedback imediato sobre entradas inválidas
 ---
 
 ## ⚠️ Limitações
 
-- **Alfabeto:** Suporta apenas as 26 letras básicas (a-z)
-- **Acentos:** Não suporta caracteres acentuados (á, é, í, ó, ú, ã, õ, ç, etc.)
+- **Alfabeto:** Baseado nas 26 letras básicas (a-z)
+- **Acentos:** ✅ **SUPORTADO!** Caracteres acentuados são automaticamente normalizados (á→a, ç→c, etc.)
 - **Segurança:** Com apenas 26 chaves possíveis, pode ser quebrado por força bruta
 - **Uso recomendado:** Fins educacionais e recreativos
 
-### Por que não suporta acentos?
+### Como funciona o suporte a acentos?
 
-O programa usa a função `ord()` para mapear caracteres às suas posições no alfabeto (0-25). Caracteres acentuados têm valores fora deste intervalo, causando erros. Para evitar isso, solicita-se ao usuário que insira mensagens sem acentos.
+O projeto usa o módulo `utils_normalizacao.py` que converte automaticamente caracteres especiais:
+- **Vogais acentuadas:** á, à, ã, â, ä → a | é, è, ê, ë → e | í, ì, î, ï → i | ó, ò, õ, ô, ö → o | ú, ù, û, ü → u
+- **Consoantes especiais:** ç → c | ñ → n
 
-### Melhorias Futuras
+📖 [Ver documentação completa sobre acentos](docs/SUPORTE_ACENTOS.md)
 
-- ✅ Suporte para caracteres acentuados
-- ✅ Interface gráfica (GUI)
-- ✅ Criptografia mais forte combinando múltiplas técnicas
-- ✅ Análise de frequência automática para quebrar códigos
+### Melhorias Implementadas
+
+- ✅ **Suporte para caracteres acentuados** (implementado!)
+- ✅ **Interface gráfica web** (implementado!)
+- ✅ **Dark Mode** para conforto visual (implementado!)
+- ✅ **Layout responsivo mobile** (implementado!)
+- 🔄 Criptografia mais forte combinando múltiplas técnicas (futuro)
+- 🔄 Análise de frequência automática para quebrar códigos (futuro)
 
 ## 🛡️ Segurança
 

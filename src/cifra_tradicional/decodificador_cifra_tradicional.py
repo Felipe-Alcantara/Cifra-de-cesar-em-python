@@ -1,3 +1,13 @@
+import sys
+import os
+
+# Adiciona o diretório ferramentas ao path para importar utils_normalizacao
+ferramentas_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ferramentas')
+if ferramentas_path not in sys.path:
+    sys.path.insert(0, ferramentas_path)
+
+from utils_normalizacao import normalizar_texto  # type: ignore
+
 def deslocar_alfabeto(deslocamento):
     """Cria um alfabeto deslocado baseado no valor fornecido"""
     alfabeto = 'abcdefghijklmnopqrstuvwxyz'
@@ -7,7 +17,8 @@ def deslocar_alfabeto(deslocamento):
 def decifrar_mensagem(mensagem_cifrada, alfabeto_deslocado):
     """Decifra uma mensagem usando o alfabeto deslocado"""
     alfabeto_original = 'abcdefghijklmnopqrstuvwxyz'
-    mensagem_cifrada = mensagem_cifrada.lower()
+    # Normaliza a mensagem cifrada (remove acentos se houver)
+    mensagem_cifrada = normalizar_texto(mensagem_cifrada)
     mensagem_decifrada = ''
     
     for caractere in mensagem_cifrada:
@@ -29,6 +40,7 @@ def main():
     print("=" * 60)
     print("ℹ️  Use este programa para decifrar mensagens criptografadas")
     print("ℹ️  com a Cifra de César tradicional")
+    print("ℹ️  Agora com suporte a acentos! (ç→c, á→a, etc.)")
     print("=" * 60)
     print()
     

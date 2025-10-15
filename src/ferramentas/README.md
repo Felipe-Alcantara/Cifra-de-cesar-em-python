@@ -2,7 +2,33 @@
 
 Esta pasta contém utilitários e ferramentas auxiliares para trabalhar com cifras.
 
-## 📄 Arquivo
+## 📄 Arquivos
+
+### `utils_normalizacao.py` ⭐ NOVO
+
+**Descrição:** Módulo de normalização de texto para suporte a acentos
+
+**O que faz:**
+- Converte caracteres acentuados para suas versões básicas (á→a, ç→c, etc.)
+- Remove acentos mantendo compatibilidade com alfabeto a-z
+- Fornece feedback sobre conversões realizadas
+- Usado por todos os programas do projeto
+
+**Funções principais:**
+- `normalizar_texto(texto)` - Normaliza removendo acentos
+- `mostrar_conversoes(texto)` - Mostra conversões realizadas
+
+**Conversões suportadas:**
+- Vogais: á à ã â ä → a | é è ê ë → e | í ì î ï → i | ó ò õ ô ö → o | ú ù û ü → u
+- Especiais: ç → c | ñ → n
+
+**Como usar:**
+```python
+from utils_normalizacao import normalizar_texto
+
+texto = "São Paulo"
+normalizado = normalizar_texto(texto)  # "sao paulo"
+```
 
 ### `deslocamento_alfabeto_interativo.py`
 
@@ -13,6 +39,7 @@ Esta pasta contém utilitários e ferramentas auxiliares para trabalhar com cifr
 - Permite consultar qual número corresponde a cada letra
 - Modo interativo contínuo (não precisa reiniciar)
 - Útil para aprendizado e debugging
+- **Agora com suporte a acentos!** Digite "é" e veja a conversão automática
 
 ## 🚀 Como Usar
 

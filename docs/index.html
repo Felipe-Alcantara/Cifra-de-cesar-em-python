@@ -381,12 +381,13 @@
             <h2>🔐 Cifrar Mensagem (Tradicional)</h2>
             <div class="info-box">
                 <strong>ℹ️ Como funciona:</strong> Desloca cada letra do alfabeto por N posições. 
-                Exemplo: Com deslocamento 3, 'A' vira 'D'.
+                Exemplo: Com deslocamento 3, 'A' vira 'D'.<br>
+                <strong>🌍 Suporte a acentos:</strong> Caracteres como á, é, ç são automaticamente convertidos (á→a, ç→c).
             </div>
             
             <div class="input-group">
-                <label for="mensagem-cifrar">📝 Mensagem (sem acentos):</label>
-                <textarea id="mensagem-cifrar" placeholder="Digite sua mensagem aqui..."></textarea>
+                <label for="mensagem-cifrar">📝 Mensagem (acentos são automaticamente convertidos):</label>
+                <textarea id="mensagem-cifrar" placeholder="Digite sua mensagem aqui... (Ex: São Paulo → sao paulo)"></textarea>
             </div>
             
             <div class="input-group">
@@ -403,7 +404,8 @@
         <div id="tradicional-decifrar" class="tab-content">
             <h2>🔓 Decifrar Mensagem (Tradicional)</h2>
             <div class="info-box">
-                <strong>ℹ️ Como funciona:</strong> Reverte o processo de cifragem usando a mesma chave.
+                <strong>ℹ️ Como funciona:</strong> Reverte o processo de cifragem usando a mesma chave.<br>
+                <strong>🌍 Suporte a acentos:</strong> Mensagens com acentos são normalizadas automaticamente.
             </div>
             
             <div class="input-group">
@@ -426,12 +428,13 @@
             <h2>🔢 Codificar em Números</h2>
             <div class="info-box">
                 <strong>ℹ️ Como funciona:</strong> Converte cada letra em um número (1-26) usando alfabeto deslocado.
-                Adiciona camada extra de segurança.
+                Adiciona camada extra de segurança.<br>
+                <strong>🌍 Suporte a acentos:</strong> Caracteres especiais são convertidos (ã→a, ê→e, ç→c).
             </div>
             
             <div class="input-group">
-                <label for="mensagem-codificar">📝 Mensagem (sem acentos):</label>
-                <textarea id="mensagem-codificar" placeholder="Digite sua mensagem..."></textarea>
+                <label for="mensagem-codificar">📝 Mensagem (acentos são automaticamente convertidos):</label>
+                <textarea id="mensagem-codificar" placeholder="Digite sua mensagem aqui... (Ex: Coração → coracao)"></textarea>
             </div>
             
             <div class="input-group">
@@ -507,6 +510,21 @@
     <script type="text/python">
         from browser import document, alert
 
+        # Função de normalização de texto (remove acentos)
+        def normalizar_texto(texto):
+            mapa_acentos = {
+                'á': 'a', 'à': 'a', 'ã': 'a', 'â': 'a', 'ä': 'a',
+                'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+                'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+                'ó': 'o', 'ò': 'o', 'õ': 'o', 'ô': 'o', 'ö': 'o',
+                'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u',
+                'ç': 'c', 'ñ': 'n',
+            }
+            texto_normalizado = texto.lower()
+            for acentuado, normal in mapa_acentos.items():
+                texto_normalizado = texto_normalizado.replace(acentuado, normal)
+            return texto_normalizado
+
         # Funções de manipulação de alfabeto
         def deslocar_alfabeto(deslocamento):
             alfabeto = 'abcdefghijklmnopqrstuvwxyz'
@@ -516,7 +534,7 @@
         # TAB 1: Cifrar Tradicional
         def cifrar_mensagem(mensagem, alfabeto_deslocado):
             alfabeto_original = 'abcdefghijklmnopqrstuvwxyz'
-            mensagem = mensagem.lower()
+            mensagem = normalizar_texto(mensagem)
             mensagem_cifrada = ''
             
             for caractere in mensagem:
@@ -557,7 +575,7 @@
             <div class="result-item"><strong>📝 Mensagem original:</strong> {mensagem}</div>
             <div class="result-item">
                 <strong>🔐 Mensagem cifrada:</strong> {mensagem_cifrada}
-                <button type="button" class="btn-copy" onclick="copiarParaDecifrar('{mensagem_cifrada}', {chave}); return false;">
+                <button type="button" class="btn-copy" id="btn-copiar-cifrada" data-mensagem="{mensagem_cifrada}" data-chave="{chave}">
                     📋 Copiar para Decifrar
                 </button>
             </div>
@@ -567,11 +585,20 @@
             document['result-cifrar'].innerHTML = result_html
             document['result-cifrar'].classList.add('show', 'success')
             document['result-cifrar'].classList.remove('error')
+            
+            # Adiciona event listener ao botão
+            def on_click_copiar(ev):
+                from browser import window
+                mensagem = document['btn-copiar-cifrada'].getAttribute('data-mensagem')
+                chave = document['btn-copiar-cifrada'].getAttribute('data-chave')
+                window.copiarParaDecifrar(mensagem, chave)
+            
+            document['btn-copiar-cifrada'].bind('click', on_click_copiar)
 
         # TAB 2: Decifrar Tradicional
         def decifrar_mensagem(mensagem_cifrada, alfabeto_deslocado):
             alfabeto_original = 'abcdefghijklmnopqrstuvwxyz'
-            mensagem_cifrada = mensagem_cifrada.lower()
+            mensagem_cifrada = normalizar_texto(mensagem_cifrada)
             mensagem_decifrada = ''
             
             for caractere in mensagem_cifrada:
@@ -615,7 +642,7 @@
 
         # TAB 3: Codificar Numérico
         def codificar_numerico(mensagem, alfabeto_deslocado):
-            mensagem = mensagem.lower()
+            mensagem = normalizar_texto(mensagem)
             numeros = []
             mapeamento = {letra: str(i+1) for i, letra in enumerate(alfabeto_deslocado)}
             
@@ -652,7 +679,7 @@
             <div class="result-item"><strong>📝 Mensagem original:</strong> {mensagem}</div>
             <div class="result-item">
                 <strong>🔢 Mensagem em números:</strong> [{numeros_str}]
-                <button type="button" class="btn-copy" onclick="copiarParaDecodificar('{numeros_str}', {chave}); return false;">
+                <button type="button" class="btn-copy" id="btn-copiar-numeros" data-numeros="{numeros_str}" data-chave="{chave}">
                     📋 Copiar para Decodificar
                 </button>
             </div>
@@ -666,6 +693,15 @@
             document['result-codificar'].innerHTML = result_html
             document['result-codificar'].classList.add('show', 'success')
             document['result-codificar'].classList.remove('error')
+            
+            # Adiciona event listener ao botão
+            def on_click_copiar_numeros(ev):
+                from browser import window
+                numeros = document['btn-copiar-numeros'].getAttribute('data-numeros')
+                chave = document['btn-copiar-numeros'].getAttribute('data-chave')
+                window.copiarParaDecodificar(numeros, chave)
+            
+            document['btn-copiar-numeros'].bind('click', on_click_copiar_numeros)
 
         # TAB 4: Decodificar Numérico
         def decodificar_numerico(numeros, alfabeto_deslocado):
@@ -796,9 +832,10 @@
             // Show selected tab
             document.getElementById(tabId).classList.add('active');
             
-            // Set active button - busca o botão correto
+            // Set active button - busca o botão correto pelo onclick
             buttons.forEach(btn => {
-                if (btn.getAttribute('onclick').includes(tabId)) {
+                const onclickAttr = btn.getAttribute('onclick');
+                if (onclickAttr && onclickAttr.includes(`'${tabId}'`)) {
                     btn.classList.add('active');
                 }
             });
@@ -806,36 +843,46 @@
 
         function copiarParaDecifrar(mensagemCifrada, chave) {
             // Previne comportamento padrão
-            event.preventDefault();
-            event.stopPropagation();
+            if (typeof event !== 'undefined') {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             
             // Muda para a aba de decifrar
             showTab('tradicional-decifrar');
             
-            // Preenche os campos
-            document.getElementById('mensagem-decifrar').value = mensagemCifrada;
-            document.getElementById('chave-decifrar').value = chave;
-            
-            // Mostra feedback com toast
-            mostrarToast('✅ Mensagem e chave copiadas! Clique em Decifrar.');
+            // Aguarda um momento para garantir que a aba foi carregada
+            setTimeout(() => {
+                // Preenche os campos
+                document.getElementById('mensagem-decifrar').value = mensagemCifrada;
+                document.getElementById('chave-decifrar').value = chave;
+                
+                // Mostra feedback com toast
+                mostrarToast('✅ Mensagem e chave copiadas! Clique em Decifrar.');
+            }, 100);
             
             return false;
         }
 
         function copiarParaDecodificar(numeros, chave) {
             // Previne comportamento padrão
-            event.preventDefault();
-            event.stopPropagation();
+            if (typeof event !== 'undefined') {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             
             // Muda para a aba de decodificar
             showTab('numerica-decodificar');
             
-            // Preenche os campos
-            document.getElementById('numeros-decodificar').value = numeros;
-            document.getElementById('chave-decodificar').value = chave;
-            
-            // Mostra feedback com toast
-            mostrarToast('✅ Números e chave copiados! Clique em Decodificar.');
+            // Aguarda um momento para garantir que a aba foi carregada
+            setTimeout(() => {
+                // Preenche os campos
+                document.getElementById('numeros-decodificar').value = numeros;
+                document.getElementById('chave-decodificar').value = chave;
+                
+                // Mostra feedback com toast
+                mostrarToast('✅ Números e chave copiados! Clique em Decodificar.');
+            }, 100);
             
             return false;
         }

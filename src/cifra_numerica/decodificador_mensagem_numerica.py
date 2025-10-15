@@ -1,3 +1,11 @@
+import sys
+import os
+
+# Adiciona o diretório ferramentas ao path (caso necessário no futuro)
+ferramentas_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ferramentas')
+if ferramentas_path not in sys.path:
+    sys.path.insert(0, ferramentas_path)
+
 def criar_alfabeto_deslocado(deslocamento):
     """Reconstrói o alfabeto deslocado usando a chave"""
     alfabeto = 'abcdefghijklmnopqrstuvwxyz'
@@ -22,6 +30,7 @@ def main():
     print("=" * 70)
     print("ℹ️  Use este programa para decifrar mensagens que foram")
     print("ℹ️  convertidas em números pelo codificador numérico")
+    print("ℹ️  O resultado já considera normalização de acentos")
     print("=" * 70)
     print()
     

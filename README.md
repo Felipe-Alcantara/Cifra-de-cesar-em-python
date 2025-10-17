@@ -81,13 +81,16 @@ Cifra-de-cesar-em-python/
 
 **`codificador_decodificador_numerico.py`**
 - Converte mensagens em números usando alfabeto deslocado
+- **Preserva espaços, números e pontuação** na mensagem original
 - Adiciona camada extra de criptografia (texto → números)
-- Exemplo: "ataque" → [22, 15, 22, 12, 16, 26]
+- Sistema de codificação: letras (1-26), espaços (0), dígitos (-0 a -9), símbolos (-100+)
+- Exemplo: "Casa 123!" → [3, 1, 19, 1, 0, -1, -2, -3, -133]
 
 **`decodificador_mensagem_numerica.py`**
 - Decifra mensagens que foram convertidas em números
+- **Reconstrói perfeitamente espaços, números e símbolos**
 - Requer a chave (deslocamento) para funcionar
-- Exemplo: [22, 15, 22, 12, 16, 26] → "ATAQUE"
+- Exemplo: [3, 1, 19, 1, 0, -1, -2, -3, -133] → "CASA 123!"
 
 📖 [Ver documentação detalhada](src/cifra_numerica/README.md)
 
@@ -234,6 +237,18 @@ python demos/demo_processo_completo.py
 - **`numerar(alfabeto_deslocado)`**: Cria mapeamento letra → número
 - **`criar_mapeamento_inverso()`**: Cria mapeamento número → letra para descriptografia
 - **`normalizar_texto(texto)`**: Converte acentos e caracteres especiais
+- **`conversao(mensagem, dicionario)`**: Codifica texto em números preservando formatação
+- **`returno(dados, dicionario)`**: Decodifica dados numéricos restaurando texto original
+
+### Sistema de Codificação Numérica
+
+O projeto utiliza um sistema inteligente para preservar toda a formatação:
+- **Números 1-26**: Representam letras do alfabeto deslocado
+- **Número 0**: Representa espaços
+- **Números -0 a -9**: Preservam dígitos originais (0-9)
+- **Números -100+**: Codificam caracteres especiais (!, ?, ., etc.)
+
+Exemplo completo: `"Olá mundo 2024!"` → `[15, 12, 1, 0, 13, 21, 14, 4, 15, 0, -2, -0, -2, -4, -133]`
 
 ### Recursos da Interface Web
 
@@ -242,6 +257,7 @@ python demos/demo_processo_completo.py
 - **Toast Notifications**: Feedback visual elegante para ações do usuário
 - **Layout Responsivo**: Otimizado para desktop, tablet e mobile
 - **Validação em Tempo Real**: Feedback imediato sobre entradas inválidas
+- **Preservação de Formatação**: Mantém espaços, números e pontuação em codificações numéricas
 ---
 
 ## ⚠️ Limitações

@@ -568,12 +568,12 @@
             <div class="info-box">
                 <strong>ℹ️ Como funciona:</strong> Converte cada letra em um número (1-26) usando alfabeto deslocado.
                 Adiciona camada extra de segurança.<br>
-                <strong>🌍 Suporte a acentos:</strong> Caracteres especiais são convertidos (ã→a, ê→e, ç→c).
+                <strong>🌍 Suporte completo:</strong> Preserva espaços (0), números originais (-0 a -9) e caracteres especiais. Acentos são convertidos (ã→a, ê→e, ç→c).
             </div>
             
             <div class="input-group">
-                <label for="mensagem-codificar">📝 Mensagem (acentos são automaticamente convertidos):</label>
-                <textarea id="mensagem-codificar" placeholder="Digite sua mensagem aqui... (Ex: Coração → coracao)"></textarea>
+                <label for="mensagem-codificar">📝 Mensagem (com números, espaços e pontuação):</label>
+                <textarea id="mensagem-codificar" placeholder="Digite sua mensagem aqui... (Ex: Casa 123! → codifica TUDO)"></textarea>
             </div>
             
             <div class="input-group">
@@ -590,12 +590,13 @@
         <div id="numerica-decodificar" class="tab-content">
             <h2>🔍 Decodificar Números</h2>
             <div class="info-box">
-                <strong>ℹ️ Como funciona:</strong> Converte números de volta para texto usando a chave correta.
+                <strong>ℹ️ Como funciona:</strong> Converte números de volta para texto usando a chave correta.<br>
+                <strong>💡 Aceita:</strong> Números positivos (letras), 0 (espaço), negativos (dígitos e símbolos).
             </div>
             
             <div class="input-group">
-                <label for="numeros-decodificar">🔢 Números (separados por vírgula):</label>
-                <input type="text" id="numeros-decodificar" placeholder="22, 15, 22, 12, 16, 26">
+                <label for="numeros-decodificar">🔢 Números (separados por vírgula, aceita negativos):</label>
+                <input type="text" id="numeros-decodificar" placeholder="22, 15, 0, -1, -2, -3">
             </div>
             
             <div class="input-group">
@@ -785,9 +786,16 @@
             numeros = []
             mapeamento = {letra: str(i+1) for i, letra in enumerate(alfabeto_deslocado)}
             
-            for letra in mensagem:
-                if letra.isalpha():
-                    numeros.append(mapeamento[letra])
+            for char in mensagem:
+                if char.isalpha():
+                    numeros.append(mapeamento[char])
+                elif char == ' ':
+                    numeros.append('0')  # Espaço = 0
+                elif char.isdigit():
+                    numeros.append(f'-{char}')  # Números originais com prefixo -
+                else:
+                    # Outros caracteres (pontuação) codificados como -100, -101, etc
+                    numeros.append(f'-{100 + ord(char)}')
             
             return numeros, mapeamento
 
@@ -843,10 +851,26 @@
             document['btn-copiar-numeros'].bind('click', on_click_copiar_numeros)
 
         # TAB 4: Decodificar Numérico
-        def decodificar_numerico(numeros, alfabeto_deslocado):
+        def decodificar_numerico(dados, alfabeto_deslocado):
             mapeamento_inverso = {i+1: letra for i, letra in enumerate(alfabeto_deslocado)}
-            letras = [mapeamento_inverso[num] for num in numeros]
-            return ''.join(letras)
+            resultado = []
+            
+            for item in dados:
+                item_str = str(item)
+                if item == 0 or item_str == '0':
+                    resultado.append(' ')  # 0 = espaço
+                elif item_str.startswith('-'):
+                    # Número negativo = caractere especial
+                    num = int(item_str[1:])
+                    if num < 10:
+                        resultado.append(str(num))  # Dígito original
+                    else:
+                        resultado.append(chr(num - 100))  # Caractere especial
+                else:
+                    # Número positivo = letra do alfabeto
+                    resultado.append(mapeamento_inverso[int(item)])
+            
+            return ''.join(resultado)
 
         def on_decodificar(event):
             numeros_str = document['numeros-decodificar'].value
@@ -862,24 +886,39 @@
             
             try:
                 # Remove espaços extras e filtra strings vazias
-                numeros = [int(n.strip()) for n in numeros_str.split(',') if n.strip()]
-                if not numeros:
+                # Agora aceita números negativos e zero
+                partes = [n.strip() for n in numeros_str.split(',') if n.strip()]
+                dados = []
+                for parte in partes:
+                    if parte.startswith('-'):
+                        dados.append(parte)  # Mantém como string para preservar o prefixo
+                    else:
+                        dados.append(int(parte))
+                
+                if not dados:
                     raise ValueError("Lista vazia")
             except:
                 show_error('result-decodificar', '❌ Formato inválido! Use números separados por vírgula.')
                 return
             
             alfabeto_deslocado = deslocar_alfabeto(chave)
-            mensagem_decifrada = decodificar_numerico(numeros, alfabeto_deslocado)
+            mensagem_decifrada = decodificar_numerico(dados, alfabeto_deslocado)
             
             result_html = f"""
             <h3>✅ Mensagem Decodificada</h3>
             <div class="alphabet-display">
                 <strong>Alfabeto deslocado:</strong> {alfabeto_deslocado}
             </div>
-            <div class="result-item"><strong>🔢 Números recebidos:</strong> [{', '.join(map(str, numeros))}]</div>
+            <div class="result-item"><strong>🔢 Dados recebidos:</strong> [{numeros_str}]</div>
             <div class="result-item"><strong>✅ Mensagem decodificada:</strong> {mensagem_decifrada.upper()}</div>
             <div class="result-item"><strong>🔑 Chave usada:</strong> {chave}</div>
+            <div class="info-box">
+                <strong>💡 Legenda:</strong><br>
+                • Números positivos (1-26) = Letras<br>
+                • 0 = Espaço<br>
+                • Números negativos (-0 a -9) = Dígitos originais<br>
+                • Outros negativos = Caracteres especiais
+            </div>
             """
             
             document['result-decodificar'].innerHTML = result_html

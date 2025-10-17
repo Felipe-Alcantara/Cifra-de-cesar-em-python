@@ -19,10 +19,25 @@ def criar_mapeamento_inverso(alfabeto_deslocado):
         mapeamento[posicao] = letra
     return mapeamento
 
-def decodificar_numeros(numeros, mapeamento):
-    """Converte a lista de números de volta para texto"""
-    letras = [mapeamento[numero] for numero in numeros if numero in mapeamento]
-    return "".join(letras)
+def decodificar_numeros(dados, mapeamento):
+    """Converte a lista de dados (números/strings) de volta para texto"""
+    resultado = []
+    
+    for item in dados:
+        if isinstance(item, str) and item.startswith('-'):
+            # Número negativo = caractere especial
+            num = int(item[1:])
+            if num < 10:
+                resultado.append(str(num))  # Dígito original
+            else:
+                resultado.append(chr(num - 100))  # Caractere especial
+        elif item == 0:
+            resultado.append(' ')  # 0 = espaço
+        elif item in mapeamento:
+            # Número positivo = letra do alfabeto
+            resultado.append(mapeamento[item])
+    
+    return "".join(resultado)
 
 def main():
     print("=" * 70)
@@ -31,22 +46,29 @@ def main():
     print("ℹ️  Use este programa para decifrar mensagens que foram")
     print("ℹ️  convertidas em números pelo codificador numérico")
     print("ℹ️  O resultado já considera normalização de acentos")
+    print("ℹ️  Suporta espaços (0), números (-0 a -9) e símbolos (-100+)")
     print("=" * 70)
     print()
     
     # Entrada da mensagem cifrada
     print("📨 MENSAGEM CIFRADA RECEBIDA")
     print("-" * 70)
-    entrada = input("🔢 Cole a lista de números (ex: 22, 15, 22, 12, 16, 26): ")
+    entrada = input("🔢 Cole a lista de dados (ex: 22, 0, 15, -1, -2, -133): ")
     
-    # Converte a string de entrada em lista de inteiros
+    # Converte a string de entrada em lista de dados (inteiros e strings)
     try:
-        numeros_cifrados = [int(num.strip()) for num in entrada.split(",")]
+        dados_cifrados = []
+        for item in entrada.split(","):
+            item = item.strip()
+            if item.startswith('-') and not item[1:].isdigit():
+                dados_cifrados.append(item)  # Mantém string para preservar prefixo
+            else:
+                dados_cifrados.append(int(item))
     except ValueError:
         print("❌ ERRO: Formato inválido! Use números separados por vírgula.")
         return
     
-    print(f"✅ Mensagem numérica capturada: {numeros_cifrados}")
+    print(f"✅ Dados capturados: {dados_cifrados}")
     print()
     
     # Entrada da chave (deslocamento)
@@ -72,7 +94,7 @@ def main():
     
     alfabeto_deslocado = criar_alfabeto_deslocado(chave)
     mapeamento = criar_mapeamento_inverso(alfabeto_deslocado)
-    mensagem_decifrada = decodificar_numeros(numeros_cifrados, mapeamento)
+    mensagem_decifrada = decodificar_numeros(dados_cifrados, mapeamento)
     
     # Exibir resultados
     print("🔍 ANÁLISE DO ALFABETO:")
@@ -85,20 +107,38 @@ def main():
     print(f"   {mapeamento}")
     print()
     
+    print("💡 LEGENDA:")
+    print("   • Números positivos (1-26) = Letras")
+    print("   • 0 = Espaço")
+    print("   • Números negativos (-0 a -9) = Dígitos originais")
+    print("   • Outros negativos = Caracteres especiais")
+    print()
+    
     print("=" * 70)
     print("   RESULTADO DA DESCRIPTOGRAFIA")
     print("=" * 70)
     print()
-    print(f"🔢 Mensagem cifrada (números):  {numeros_cifrados}")
+    print(f"🔢 Dados cifrados:              {dados_cifrados}")
     print(f"📝 Mensagem decifrada (texto):  {mensagem_decifrada.upper()}")
     print()
     
     # Mostra a conversão passo a passo
     print("🔍 CONVERSÃO DETALHADA:")
     print("-" * 70)
-    for i, numero in enumerate(numeros_cifrados):
-        letra = mapeamento.get(numero, "?")
-        print(f"   Posição {i+1}: número {numero:2d} → letra '{letra}'")
+    for i, dado in enumerate(dados_cifrados):
+        if isinstance(dado, str) and dado.startswith('-'):
+            num = int(dado[1:])
+            if num < 10:
+                char = str(num)
+                print(f"   Posição {i+1}: {dado} → dígito '{char}'")
+            else:
+                char = chr(num - 100)
+                print(f"   Posição {i+1}: {dado} → símbolo '{char}'")
+        elif dado == 0:
+            print(f"   Posição {i+1}: 0 → espaço ' '")
+        else:
+            letra = mapeamento.get(dado, "?")
+            print(f"   Posição {i+1}: número {dado:2d} → letra '{letra}'")
     
     print()
     print("=" * 70)

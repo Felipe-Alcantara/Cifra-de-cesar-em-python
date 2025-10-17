@@ -21,13 +21,43 @@ def criar_ordem_personalizada(valor):
 def conversao(mensagem, dicionario_personalizado):
     # Normaliza a mensagem (remove acentos)
     mensagem = normalizar_texto(mensagem)
-    numeros = [dicionario_personalizado[letra] for letra in mensagem if letra in dicionario_personalizado]
-    return numeros
+    resultado = []
+    
+    for char in mensagem:
+        if char in dicionario_personalizado:
+            # Letra do alfabeto
+            resultado.append(dicionario_personalizado[char])
+        elif char == ' ':
+            # Espaço = 0
+            resultado.append(0)
+        elif char.isdigit():
+            # Números originais com prefixo negativo (-0 a -9)
+            resultado.append(f'-{char}')
+        else:
+            # Outros caracteres (pontuação) codificados como -100, -101, etc
+            resultado.append(f'-{100 + ord(char)}')
+    
+    return resultado
 
-def returno(numeros, dicionario_personalizado):
+def returno(dados, dicionario_personalizado):
     numeros_letras = {valor: letra for letra, valor in dicionario_personalizado.items()}
-    letras_mudadas = [numeros_letras[numero] for numero in numeros]
-    return "".join(letras_mudadas)
+    resultado = []
+    
+    for item in dados:
+        if isinstance(item, str) and item.startswith('-'):
+            # Número negativo = caractere especial
+            num = int(item[1:])
+            if num < 10:
+                resultado.append(str(num))  # Dígito original
+            else:
+                resultado.append(chr(num - 100))  # Caractere especial
+        elif item == 0:
+            resultado.append(' ')  # 0 = espaço
+        else:
+            # Número positivo = letra do alfabeto
+            resultado.append(numeros_letras[item])
+    
+    return "".join(resultado)
 
 print("=" * 60)
 print("   CODIFICADOR/DECODIFICADOR NUMÉRICO")
@@ -35,6 +65,7 @@ print("=" * 60)
 print("ℹ️  Este programa converte mensagens em números e vice-versa")
 print("ℹ️  usando um alfabeto personalizado deslocado")
 print("ℹ️  Agora com suporte a acentos! (ç→c, á→a, etc.)")
+print("ℹ️  Preserva espaços, números e pontuação!")
 print("=" * 60)
 print()
 

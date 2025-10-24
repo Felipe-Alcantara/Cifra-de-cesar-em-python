@@ -131,6 +131,53 @@ Cifra-de-cesar-em-python/
 
 📖 [Ver documentação detalhada](docs/README.md)
 
+---
+
+## 🌐 Versão Web - Use Online!
+
+**🚀 Acesse agora:** [https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/)
+
+### 💡 Por que usar a versão web?
+
+A interface web oferece a experiência mais completa e acessível do projeto:
+
+- **🎯 Sem instalação**: Funciona direto no navegador, em qualquer dispositivo
+- **🌙 Dark Mode**: Alterne entre tema claro e escuro com persistência
+- **📱 Responsivo**: Otimizado para desktop, tablet e mobile
+- **⚡ Instantâneo**: Resultados em tempo real enquanto você digita
+- **🔄 Integrado**: Botões para copiar resultados entre ferramentas
+- **✅ Validação**: Feedback imediato sobre entradas inválidas
+- **🌍 Acentos**: Suporte completo a caracteres especiais (ç, á, ã, etc.)
+- **📋 Toast Notifications**: Feedback visual elegante
+
+### 🛠️ Ferramentas disponíveis na web:
+
+1. **🔐 Cifrar Tradicional** - Criptografa texto com deslocamento alfabético
+2. **🔓 Decifrar Tradicional** - Descriptografa mensagens cifradas
+3. **🔢 Codificar Numérico** - Converte texto em números (preserva espaços e pontuação!)
+4. **🔍 Decodificar Numérico** - Converte números de volta para texto
+5. **📖 Consulta de Alfabeto** - Visualiza o alfabeto deslocado
+
+### 🎨 Tecnologias da Interface Web:
+
+- **Brython 3.12.0**: Python rodando nativamente no navegador
+- **HTML5 + CSS3**: Interface moderna com CSS Variables para temas
+- **JavaScript**: Dark mode toggle com localStorage
+- **Design Responsivo**: Media queries para adaptação mobile
+- **Zero dependências**: Funciona completamente offline
+
+### 📸 Recursos Visuais:
+
+- **Bordas e sombras** em todos os painéis para melhor definição
+- **Efeitos hover** nos elementos interativos
+- **Animações suaves** nas transições entre temas
+- **Cores otimizadas** para conforto visual em ambos os temas
+- **Tipografia clara** com fonte monospace nos resultados
+
+**💻 Para desenvolvedores:** O código está em `docs/index.html` - um único arquivo HTML autocontido com todo o CSS e Python/Brython embutido. Perfeito para estudar integração web!
+
+---
+
 ## 🎯 Como Usar
 
 ### Opção 1: Interface Web (Recomendado para iniciantes) 🌐

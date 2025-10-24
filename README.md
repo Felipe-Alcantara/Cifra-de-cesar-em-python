@@ -2,7 +2,73 @@
 
 Um projeto completo de criptografia usando a Cifra de César, incluindo conversão numérica e ferramentas de descriptografia.
 
-## 📋 Sobre o Projeto
+## � Índice
+
+- [🌐 **Versão Web - Use Online!**](#-versão-web---use-online) ⭐ **DESTAQUE**
+- [📋 Sobre o Projeto](#-sobre-o-projeto)
+- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
+- [🚀 Ferramentas Disponíveis](#-ferramentas-disponíveis)
+- [📚 Documentação Completa Disponível](#-documentação-completa-disponível)
+- [🎯 Como Usar](#-como-usar)
+- [📚 Guia Rápido](#-guia-rápido)
+- [🔧 Funcionalidades Técnicas](#-funcionalidades-técnicas)
+- [⚠️ Limitações](#️-limitações)
+- [🛡️ Segurança](#️-segurança)
+- [🎓 Objetivo Educacional](#-objetivo-educacional)
+- [📝 Licença](#-licença)
+- [👤 Autor](#-autor)
+- [🤝 Contribuições](#-contribuições)
+
+---
+
+## 🌐 Versão Web - Use Online! ⭐
+
+> **🚀 EXPERIMENTE AGORA - Não precisa instalar nada!**
+> 
+> **[👉 CLIQUE AQUI PARA ACESSAR A APLICAÇÃO WEB 👈](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/)**
+
+### 💡 Por que usar a versão web?
+
+A interface web oferece a experiência mais completa e acessível do projeto:
+
+- **🎯 Sem instalação**: Funciona direto no navegador, em qualquer dispositivo
+- **🌙 Dark Mode**: Alterne entre tema claro e escuro com persistência
+- **📱 Responsivo**: Otimizado para desktop, tablet e mobile
+- **⚡ Instantâneo**: Resultados em tempo real enquanto você digita
+- **🔄 Integrado**: Botões para copiar resultados entre ferramentas
+- **✅ Validação**: Feedback imediato sobre entradas inválidas
+- **🌍 Acentos**: Suporte completo a caracteres especiais (ç, á, ã, etc.)
+- **📋 Toast Notifications**: Feedback visual elegante
+
+### 🛠️ Ferramentas disponíveis na web:
+
+1. **🔐 Cifrar Tradicional** - Criptografa texto com deslocamento alfabético
+2. **🔓 Decifrar Tradicional** - Descriptografa mensagens cifradas
+3. **🔢 Codificar Numérico** - Converte texto em números (preserva espaços e pontuação!)
+4. **🔍 Decodificar Numérico** - Converte números de volta para texto
+5. **📖 Consulta de Alfabeto** - Visualiza o alfabeto deslocado
+
+### 🎨 Tecnologias da Interface Web:
+
+- **Brython 3.12.0**: Python rodando nativamente no navegador
+- **HTML5 + CSS3**: Interface moderna com CSS Variables para temas
+- **JavaScript**: Dark mode toggle com localStorage
+- **Design Responsivo**: Media queries para adaptação mobile
+- **Zero dependências**: Funciona completamente offline
+
+### 📸 Recursos Visuais:
+
+- **Bordas e sombras** em todos os painéis para melhor definição
+- **Efeitos hover** nos elementos interativos
+- **Animações suaves** nas transições entre temas
+- **Cores otimizadas** para conforto visual em ambos os temas
+- **Tipografia clara** com fonte monospace nos resultados
+
+**💻 Para desenvolvedores:** O código está em `docs/index.html` - um único arquivo HTML autocontido com todo o CSS e Python/Brython embutido. Perfeito para estudar integração web!
+
+---
+
+## �📋 Sobre o Projeto
 
 Este projeto implementa a **Cifra de César**, um tipo clássico de cifra de substituição usada para criptografia de texto. Além da implementação tradicional, o projeto inclui várias ferramentas adicionais para codificação numérica, descriptografia e demonstrações educacionais.
 
@@ -133,68 +199,17 @@ Cifra-de-cesar-em-python/
 
 ---
 
-## 🌐 Versão Web - Use Online!
+## � Como Usar
 
-**🚀 Acesse agora:** [https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/)
+### Opção 1: Interface Web Online (Recomendado!) 🌐
 
-### 💡 Por que usar a versão web?
+**🚀 Acesse diretamente:** [https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/)
 
-A interface web oferece a experiência mais completa e acessível do projeto:
-
-- **🎯 Sem instalação**: Funciona direto no navegador, em qualquer dispositivo
-- **🌙 Dark Mode**: Alterne entre tema claro e escuro com persistência
-- **📱 Responsivo**: Otimizado para desktop, tablet e mobile
-- **⚡ Instantâneo**: Resultados em tempo real enquanto você digita
-- **🔄 Integrado**: Botões para copiar resultados entre ferramentas
-- **✅ Validação**: Feedback imediato sobre entradas inválidas
-- **🌍 Acentos**: Suporte completo a caracteres especiais (ç, á, ã, etc.)
-- **📋 Toast Notifications**: Feedback visual elegante
-
-### 🛠️ Ferramentas disponíveis na web:
-
-1. **🔐 Cifrar Tradicional** - Criptografa texto com deslocamento alfabético
-2. **🔓 Decifrar Tradicional** - Descriptografa mensagens cifradas
-3. **🔢 Codificar Numérico** - Converte texto em números (preserva espaços e pontuação!)
-4. **🔍 Decodificar Numérico** - Converte números de volta para texto
-5. **📖 Consulta de Alfabeto** - Visualiza o alfabeto deslocado
-
-### 🎨 Tecnologias da Interface Web:
-
-- **Brython 3.12.0**: Python rodando nativamente no navegador
-- **HTML5 + CSS3**: Interface moderna com CSS Variables para temas
-- **JavaScript**: Dark mode toggle com localStorage
-- **Design Responsivo**: Media queries para adaptação mobile
-- **Zero dependências**: Funciona completamente offline
-
-### 📸 Recursos Visuais:
-
-- **Bordas e sombras** em todos os painéis para melhor definição
-- **Efeitos hover** nos elementos interativos
-- **Animações suaves** nas transições entre temas
-- **Cores otimizadas** para conforto visual em ambos os temas
-- **Tipografia clara** com fonte monospace nos resultados
-
-**💻 Para desenvolvedores:** O código está em `docs/index.html` - um único arquivo HTML autocontido com todo o CSS e Python/Brython embutido. Perfeito para estudar integração web!
-
----
-
-## 🎯 Como Usar
-
-### Opção 1: Interface Web (Recomendado para iniciantes) 🌐
-
+Ou abra localmente:
 ```bash
 # Abra o arquivo HTML em qualquer navegador
 docs/index.html
 ```
-
-**Vantagens:**
-- ✅ Não precisa instalar Python
-- ✅ Interface visual bonita com Dark Mode 🌙
-- ✅ Todas as funções em um lugar
-- ✅ Suporte completo a acentos (á, é, ç, ã, etc.)
-- ✅ Botões rápidos para copiar entre abas
-- ✅ Toast notifications para feedback
-- ✅ Funciona em qualquer dispositivo (responsivo)
 
 ---
 

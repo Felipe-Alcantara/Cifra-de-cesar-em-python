@@ -1,5 +1,21 @@
 # 🔐 Cifra de César em Python
 
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Brython](https://img.shields.io/badge/Brython-3.12-FF6347?style=for-the-badge&logo=python&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+**Uma calculadora de criptografia moderna e elegante desenvolvida em Python**
+
+[🌐 Demo Online](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/) • [📖 Documentação](docs/README.md) • [🚀 Como Usar](#-como-usar) • [⭐ Features](#-versão-web---use-online-)
+
+</div>
+
+---
+
 Um projeto completo de criptografia usando a Cifra de César, incluindo conversão numérica e ferramentas de descriptografia.
 
 ## � Índice

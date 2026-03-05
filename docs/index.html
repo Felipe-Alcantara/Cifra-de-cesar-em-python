@@ -4,61 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cifra de César - Interface Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython_stdlib.js"></script>
     <style>
-        :root {
-            /* Light Mode Colors */
-            --bg-gradient-start: #667eea;
-            --bg-gradient-end: #764ba2;
-            --text-primary: #333;
-            --text-secondary: #555;
-            --text-result: #333;
-            --bg-container: rgba(255, 255, 255, 0.95);
-            --bg-container-gradient: rgba(248, 249, 252, 0.95);
-            --bg-tab-button: rgba(255, 255, 255, 0.8);
-            --bg-tab-active: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --bg-tab-content: rgba(255, 255, 255, 0.6);
-            --bg-input: white;
-            --border-color: #ddd;
-            --border-focus: #667eea;
-            --bg-result: white;
-            --bg-result-item: #f8f9fa;
-            --bg-info: #e3f2fd;
-            --border-info: #2196f3;
-            --text-info-strong: #1976d2;
-            --bg-alphabet: white;
-            --text-alphabet: #333;
-            --shadow-main: rgba(0, 0, 0, 0.2);
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --border-result: #e0e0e0;
-        }
+        /* ================================================
+           DESIGN SYSTEM FELIXOVERSE - Cifra de César
+           ================================================
+           Paleta: Felixo Purple (#C084FC / #A855F7)
+           Fonte: Space Grotesk
+           Backgrounds: Black → Zinc-950 → Zinc-900
+           Bordas: white/5, white/10, white/20
+           ================================================ */
 
-        body.dark-mode {
-            /* Dark Mode Colors - ULTRA DARK */
-            --bg-gradient-start: #0a0a15;
-            --bg-gradient-end: #12121f;
-            --text-primary: #a0a0b0;
-            --text-secondary: #808090;
-            --text-result: #888898;
-            --bg-container: rgba(15, 15, 22, 0.95);
-            --bg-container-gradient: rgba(12, 12, 18, 0.95);
-            --bg-tab-button: rgba(30, 30, 42, 0.85);
-            --bg-tab-active: linear-gradient(135deg, #3a4fc8 0%, #4a2d7a 100%);
-            --bg-tab-content: rgba(20, 20, 32, 0.6);
-            --bg-input: #141420;
-            --border-color: #2a2a38;
-            --border-focus: #4a5fc8;
-            --bg-result: #08080f;
-            --bg-result-item: #101018;
-            --bg-info: #0c0c16;
-            --border-info: #2a4fc8;
-            --text-info-strong: #4a7fc8;
-            --bg-alphabet: #0a0a12;
-            --text-alphabet: #7a7a90;
-            --shadow-main: rgba(0, 0, 0, 0.9);
-            --shadow-light: rgba(0, 0, 0, 0.7);
-            --border-result: #1a1a28;
+        :root {
+            /* Cores de Marca */
+            --felixo-purple: #C084FC;
+            --felixo-purple-bright: #A855F7;
+            --felixo-purple-glow: rgba(168, 85, 247, 0.4);
+            --felixo-purple-subtle: rgba(192, 132, 252, 0.1);
+
+            /* Backgrounds */
+            --bg-base: #000000;
+            --bg-zinc-950: rgb(9, 9, 11);
+            --bg-zinc-900: rgb(24, 24, 27);
+            --bg-zinc-800: rgb(39, 39, 42);
+            --bg-card: rgba(9, 9, 11, 0.5);
+
+            /* Texto */
+            --text-zinc-50: rgb(250, 250, 250);
+            --text-zinc-300: rgb(212, 212, 216);
+            --text-zinc-400: rgb(161, 161, 170);
+            --text-zinc-500: rgb(113, 113, 122);
+
+            /* Bordas */
+            --border-5: rgba(255, 255, 255, 0.05);
+            --border-10: rgba(255, 255, 255, 0.1);
+            --border-20: rgba(255, 255, 255, 0.2);
+            --border-30: rgba(255, 255, 255, 0.3);
+
+            /* Sombras */
+            --shadow-main: rgba(0, 0, 0, 0.8);
+            --shadow-purple: rgba(168, 85, 247, 0.15);
+
+            /* Status */
+            --success-bg: rgba(22, 101, 52, 0.3);
+            --success-border: rgba(34, 197, 94, 0.4);
+            --success-text: rgb(134, 239, 172);
+            --error-bg: rgba(127, 29, 29, 0.3);
+            --error-border: rgba(239, 68, 68, 0.4);
+            --error-text: rgb(252, 165, 165);
         }
 
         * {
@@ -67,115 +62,181 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        /* Scrollbar Customizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(74, 74, 74, 0.8);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(106, 106, 106, 0.9);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(180deg, #000000 0%, rgb(9, 9, 11) 30%, #000000 100%);
             min-height: 100vh;
-            padding: 20px;
-            color: var(--text-primary);
-            transition: background 0.3s ease, color 0.3s ease;
+            padding: 24px;
+            color: var(--text-zinc-50);
+            line-height: 1.625;
         }
 
+        /* Container Principal — max-w-7xl mx-auto px-6 */
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 24px;
         }
 
+        /* ========== HEADER ========== */
         header {
             text-align: center;
-            color: white;
-            margin-bottom: 40px;
+            color: var(--text-zinc-50);
+            margin-bottom: 56px;
+            padding-top: 56px;
             animation: fadeInDown 0.8s ease-out;
             position: relative;
         }
 
-        .dark-mode-toggle {
+        header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.25;
+            background: linear-gradient(135deg, var(--felixo-purple), var(--felixo-purple-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlowPurple 3s ease-in-out infinite;
+        }
+
+        header p {
+            font-size: 18px;
+            color: var(--text-zinc-400);
+            font-weight: 400;
+        }
+
+        /* Botão Theme Toggle */
+        .theme-toggle {
             position: absolute;
             top: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
+            background: var(--bg-zinc-900);
+            border: 1px solid var(--border-10);
+            color: var(--text-zinc-300);
+            padding: 8px 16px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
-        .dark-mode-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .theme-toggle:hover {
+            background: var(--bg-zinc-800);
+            border-color: var(--border-20);
             transform: scale(1.05);
+            box-shadow: 0 0 20px var(--shadow-purple);
         }
 
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        /* ========== TAB CONTAINER (Card Principal) ========== */
+        .tab-container {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid var(--border-10);
+            box-shadow: 0 15px 40px var(--shadow-main);
+            animation: fadeInDown 1s ease-out;
+            transition: border-color 0.3s ease;
         }
 
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+        .tab-container:hover {
+            border-color: var(--border-20);
         }
 
+        /* ========== TABS (Botões de Navegação) ========== */
         .tabs {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 0;
             flex-wrap: wrap;
             animation: fadeIn 1s ease-out;
         }
 
-        .tab-container {
-            background: var(--bg-container);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 40px var(--shadow-main);
-            animation: fadeInDown 1s ease-out;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
-
         .tab-button {
             flex: 1;
             min-width: 200px;
-            padding: 15px 20px;
-            background: var(--bg-tab-button);
-            border: 2px solid rgba(102, 126, 234, 0.2);
-            border-bottom: none;
-            border-radius: 15px;
+            padding: 12px 16px;
+            background: var(--bg-zinc-900);
+            border: 1px solid var(--border-10);
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow-light);
-            color: var(--text-primary);
+            color: var(--text-zinc-400);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shimmer Effect nos Tab Buttons */
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            transition: transform 1s ease;
+        }
+
+        .tab-button:hover::after {
+            transform: translateX(150%);
         }
 
         .tab-button:hover {
-            background: rgba(102, 126, 234, 0.2);
+            background: var(--bg-zinc-800);
+            border-color: var(--border-20);
+            color: var(--text-zinc-300);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         .tab-button.active {
-            background: var(--bg-tab-active);
+            background: linear-gradient(135deg, var(--felixo-purple-bright), var(--felixo-purple));
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
-            transform: scale(1.05);
+            border-color: transparent;
+            box-shadow: 0 4px 20px var(--felixo-purple-glow);
+            transform: scale(1.03);
         }
 
+        .tab-button.active::after {
+            display: none;
+        }
+
+        /* ========== TAB CONTENT ========== */
         .tab-content {
             display: none;
-            background: var(--bg-tab-content);
-            padding: 30px;
-            border-radius: 15px;
+            background: rgba(24, 24, 27, 0.3);
+            padding: 24px;
+            border-radius: 16px;
             margin-top: 20px;
             animation: fadeIn 0.5s ease-out;
-            border: 1px solid rgba(102, 126, 234, 0.1);
+            border: 1px solid var(--border-5);
             transition: background 0.3s ease;
         }
 
@@ -183,6 +244,22 @@
             display: block;
         }
 
+        .tab-content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-zinc-50);
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+
+        .tab-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-zinc-300);
+            margin: 16px 0 12px;
+        }
+
+        /* ========== INPUTS ========== */
         .input-group {
             margin-bottom: 20px;
         }
@@ -190,91 +267,124 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--text-secondary);
-            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text-zinc-400);
+            font-size: 14px;
         }
 
         input[type="text"],
         input[type="number"],
         textarea {
             width: 100%;
+            height: 40px;
+            padding: 0 12px;
+            background: rgba(39, 39, 42, 0.5);
+            border: 1px solid var(--border-10);
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-zinc-50);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        textarea {
+            height: auto;
+            min-height: 120px;
             padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s, background 0.3s;
-            font-family: inherit;
-            background: var(--bg-input);
-            color: var(--text-primary);
+            resize: vertical;
+            line-height: 1.625;
         }
 
         input[type="text"]:focus,
         input[type="number"]:focus,
         textarea:focus {
-            outline: none;
-            border-color: var(--border-focus);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--felixo-purple);
+            box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.1), 0 0 20px rgba(168, 85, 247, 0.1);
         }
 
-        textarea {
-            min-height: 120px;
-            resize: vertical;
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-zinc-500);
         }
 
+        /* ========== BOTÕES ========== */
         button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 40px;
+            padding: 0 16px;
+            background: white;
+            color: black;
+            border: 1px solid var(--border-10);
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-right: 10px;
-            margin-top: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            margin-right: 8px;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-copy {
-            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-            padding: 10px 20px;
-            font-size: 0.9em;
-            margin-left: 10px;
+        /* Shimmer nos Botões */
+        button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: transform 1s ease;
         }
 
-        .btn-copy:hover {
-            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+        button:hover::after {
+            transform: translateX(150%);
         }
 
         button:hover {
+            background: rgb(244, 244, 245);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         button:active {
             transform: translateY(0);
         }
 
+        /* Botão Copiar — Estilo Secundário */
+        .btn-copy {
+            background: var(--bg-zinc-800);
+            color: var(--text-zinc-50);
+            border: 1px solid var(--border-10);
+            padding: 0 12px;
+            height: 36px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .btn-copy:hover {
+            background: rgb(63, 63, 70);
+            border-color: var(--border-20);
+        }
+
+        /* ========== RESULTADOS ========== */
         .result {
-            margin-top: 30px;
+            margin-top: 24px;
             padding: 20px;
-            background: var(--bg-result);
-            border: 2px solid var(--border-result);
-            border-left: 4px solid #667eea;
-            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-10);
+            border-left: 3px solid var(--felixo-purple);
+            border-radius: 16px;
             display: none;
             animation: slideIn 0.5s ease-out;
             transition: all 0.3s ease;
-            color: var(--text-result);
-            box-shadow: 0 4px 15px var(--shadow-light);
-        }
-
-        body.dark-mode .result {
-            background: #0a0a14;
-            border: 1px solid #1a1a28;
-            border-left: 3px solid #4a5fd8;
+            color: var(--text-zinc-300);
+            box-shadow: 0 4px 15px var(--shadow-main);
         }
 
         .result.show {
@@ -282,162 +392,161 @@
         }
 
         .result h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        body.dark-mode .result h3 {
-            color: #5a7fd8;
+            color: var(--felixo-purple);
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 700;
         }
 
         .result-item {
-            margin: 10px 0;
-            padding: 12px 15px;
-            background: var(--bg-result-item);
-            border: 1px solid var(--border-result);
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
+            margin: 8px 0;
+            padding: 12px 16px;
+            background: var(--bg-zinc-900);
+            border: 1px solid var(--border-5);
+            border-radius: 12px;
+            font-family: 'Space Mono', 'Courier New', monospace;
+            font-size: 14px;
             transition: all 0.3s ease;
-            color: var(--text-result);
-            box-shadow: 0 2px 5px var(--shadow-light);
+            color: var(--text-zinc-300);
             word-wrap: break-word;
             overflow-wrap: break-word;
             word-break: break-word;
         }
 
         .result-item:hover {
-            transform: translateX(2px);
-            box-shadow: 0 4px 8px var(--shadow-light);
+            border-color: var(--border-20);
+            transform: translateX(4px);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.05);
         }
 
         .result-item strong {
-            color: var(--text-primary);
+            color: var(--text-zinc-50);
+            font-weight: 600;
         }
 
-        body.dark-mode .result-item strong {
-            color: #8888a8;
+        /* Status: Sucesso */
+        .result.success {
+            border-left-color: var(--success-text);
+            animation: cardGlowBreathe 3s ease-in-out infinite;
         }
 
+        .result.success h3 {
+            color: var(--success-text);
+        }
+
+        /* Status: Erro */
+        .result.error {
+            border-left-color: var(--error-text);
+            background: var(--error-bg);
+            border-color: var(--error-border);
+        }
+
+        .result.error h3 {
+            color: var(--error-text);
+        }
+
+        /* ========== INFO BOX ========== */
+        .info-box {
+            background: rgba(192, 132, 252, 0.05);
+            border: 1px solid rgba(192, 132, 252, 0.15);
+            border-left: 3px solid var(--felixo-purple);
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            color: var(--text-zinc-400);
+            font-size: 14px;
+            line-height: 1.625;
+            transition: all 0.3s ease;
+        }
+
+        .info-box:hover {
+            border-color: rgba(192, 132, 252, 0.3);
+            background: rgba(192, 132, 252, 0.08);
+        }
+
+        .info-box strong {
+            color: var(--felixo-purple);
+            font-weight: 600;
+        }
+
+        /* ========== ALPHABET DISPLAY ========== */
+        .alphabet-display {
+            font-family: 'Space Mono', 'Courier New', monospace;
+            background: var(--bg-zinc-950);
+            color: var(--text-zinc-400);
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 1px solid var(--border-10);
+            overflow-x: auto;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .alphabet-display:hover {
+            border-color: var(--border-20);
+        }
+
+        .alphabet-display strong {
+            color: var(--felixo-purple);
+        }
+
+        /* ========== GRID ========== */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
-        @media (max-width: 768px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-
-            header {
-                padding-top: 60px;
-            }
-
-            header h1 {
-                font-size: 2em;
-            }
-
-            .dark-mode-toggle {
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                font-size: 1em;
-                padding: 8px 16px;
-                z-index: 1000;
-            }
-
-            .tab-button {
-                min-width: 150px;
-                font-size: 0.9em;
-                padding: 12px 15px;
-            }
-        }
-
-        .emoji {
-            font-size: 1.5em;
-            margin-right: 5px;
-        }
-
+        /* ========== TOAST ========== */
         .toast {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: var(--bg-zinc-900);
+            color: var(--felixo-purple);
+            padding: 16px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            box-shadow: 0 4px 20px var(--felixo-purple-glow);
             z-index: 1000;
             animation: slideInRight 0.5s ease-out;
-            font-weight: bold;
+            font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
         }
 
-        @keyframes slideInRight {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        /* ========== EMOJI ========== */
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 4px;
         }
 
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
+        /* ========== FOOTER ========== */
+        footer {
+            text-align: center;
+            color: var(--text-zinc-500);
+            margin-top: 56px;
+            padding: 20px;
+            font-size: 14px;
         }
 
-        .info-box {
-            background: var(--bg-info);
-            border: 2px solid var(--border-result);
-            border-left: 4px solid var(--border-info);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px var(--shadow-light);
-            transition: all 0.3s ease;
+        footer a {
+            color: var(--felixo-purple);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
         }
 
-        .info-box strong {
-            color: var(--text-info-strong);
+        footer a:hover {
+            color: var(--felixo-purple-bright);
+            text-decoration: underline;
         }
 
-        .alphabet-display {
-            font-family: 'Courier New', monospace;
-            background: var(--bg-alphabet);
-            color: var(--text-alphabet);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 2px solid var(--border-result);
-            box-shadow: 0 3px 10px var(--shadow-light);
-            overflow-x: auto;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .alphabet-display {
-            border-color: #3a3a5a;
-        }
-
-        .alphabet-display strong {
-            color: var(--text-alphabet);
-        }
-
+        /* ========== ANIMAÇÕES ========== */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes fadeInDown {
@@ -462,38 +571,120 @@
             }
         }
 
-        .error {
-            background: #ffebee;
-            border-left-color: #f44336;
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
-        .success {
-            background: #e8f5e9;
-            border-left-color: #4caf50;
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
         }
 
-        footer {
-            text-align: center;
-            color: white;
-            margin-top: 50px;
-            padding: 20px;
-            opacity: 0.9;
+        /* Glow Respiração Roxa (Card) */
+        @keyframes cardGlowBreathe {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(168, 85, 247, 0.05);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+            }
         }
 
-        footer a {
-            color: white;
-            text-decoration: underline;
+        /* Glow do Título */
+        @keyframes titleGlowPurple {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+                filter: brightness(1);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
+                filter: brightness(1.1);
+            }
+        }
+
+        /* ========== RESPONSIVIDADE ========== */
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding-top: 64px;
+            }
+
+            header h1 {
+                font-size: 36px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            .theme-toggle {
+                position: fixed;
+                top: 12px;
+                right: 12px;
+                font-size: 12px;
+                padding: 6px 12px;
+                z-index: 1000;
+            }
+
+            .tab-button {
+                min-width: 150px;
+                font-size: 12px;
+                padding: 10px 12px;
+            }
+
+            .tab-container {
+                padding: 16px;
+                border-radius: 16px;
+            }
+
+            .tab-content {
+                padding: 16px;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            body {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            .tab-button {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
 <body onload="brython()">
     <div class="container">
         <header>
-            <button class="dark-mode-toggle" onclick="toggleDarkMode()" id="darkModeToggle">
-                🌙 Dark Mode
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+                ☀️ Light Mode
             </button>
             <h1>🔐 Cifra de César</h1>
-            <p>Interface Web Interativa - Criptografe e Decifre Mensagens</p>
+            <p>Interface Web Interativa — Criptografe e Decifre Mensagens</p>
         </header>
 
         <div class="tab-container">
@@ -639,7 +830,7 @@
 
         <footer>
             <p>
-                🔐 Cifra de César - Projeto Educacional<br>
+                🔐 Cifra de César — Projeto Educacional<br>
                 <a href="https://github.com/Felipe-Alcantara/Cifra-de-cesar-em-python" target="_blank">
                     Ver no GitHub
                 </a>
@@ -1001,41 +1192,35 @@
     </script>
 
     <script>
-        // Dark Mode Toggle
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
+        // Theme Toggle (padrão é dark, toggle para light)
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
             
-            // Salva preferência no localStorage
-            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            localStorage.setItem('themeMode', isLight ? 'light' : 'dark');
             
-            // Atualiza texto do botão
-            const toggleBtn = document.getElementById('darkModeToggle');
-            toggleBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+            const toggleBtn = document.getElementById('themeToggle');
+            toggleBtn.textContent = isLight ? '🌙 Dark Mode' : '☀️ Light Mode';
         }
 
-        // Carrega preferência salva ao carregar página
+        // Carrega preferência salva
         document.addEventListener('DOMContentLoaded', function() {
-            const darkMode = localStorage.getItem('darkMode');
-            if (darkMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                document.getElementById('darkModeToggle').textContent = '☀️ Light Mode';
+            const themeMode = localStorage.getItem('themeMode');
+            if (themeMode === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').textContent = '🌙 Dark Mode';
             }
         });
 
         function showTab(tabId) {
-            // Hide all tabs
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
             
-            // Remove active from all buttons
             const buttons = document.querySelectorAll('.tab-button');
             buttons.forEach(btn => btn.classList.remove('active'));
             
-            // Show selected tab
             document.getElementById(tabId).classList.add('active');
             
-            // Set active button - busca o botão correto pelo onclick
             buttons.forEach(btn => {
                 const onclickAttr = btn.getAttribute('onclick');
                 if (onclickAttr && onclickAttr.includes(`'${tabId}'`)) {
@@ -1045,22 +1230,16 @@
         }
 
         function copiarParaDecifrar(mensagemCifrada, chave) {
-            // Previne comportamento padrão
             if (typeof event !== 'undefined') {
                 event.preventDefault();
                 event.stopPropagation();
             }
             
-            // Muda para a aba de decifrar
             showTab('tradicional-decifrar');
             
-            // Aguarda um momento para garantir que a aba foi carregada
             setTimeout(() => {
-                // Preenche os campos
                 document.getElementById('mensagem-decifrar').value = mensagemCifrada;
                 document.getElementById('chave-decifrar').value = chave;
-                
-                // Mostra feedback com toast
                 mostrarToast('✅ Mensagem e chave copiadas! Clique em Decifrar.');
             }, 100);
             
@@ -1068,22 +1247,16 @@
         }
 
         function copiarParaDecodificar(numeros, chave) {
-            // Previne comportamento padrão
             if (typeof event !== 'undefined') {
                 event.preventDefault();
                 event.stopPropagation();
             }
             
-            // Muda para a aba de decodificar
             showTab('numerica-decodificar');
             
-            // Aguarda um momento para garantir que a aba foi carregada
             setTimeout(() => {
-                // Preenche os campos
                 document.getElementById('numeros-decodificar').value = numeros;
                 document.getElementById('chave-decodificar').value = chave;
-                
-                // Mostra feedback com toast
                 mostrarToast('✅ Números e chave copiados! Clique em Decodificar.');
             }, 100);
             
@@ -1091,13 +1264,11 @@
         }
 
         function mostrarToast(mensagem) {
-            // Cria o toast
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.textContent = mensagem;
             document.body.appendChild(toast);
             
-            // Remove após 3 segundos
             setTimeout(() => {
                 toast.style.animation = 'slideOutRight 0.5s ease-out';
                 setTimeout(() => {

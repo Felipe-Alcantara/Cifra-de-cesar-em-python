@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cifra de César - Interface Web</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython_stdlib.js"></script>
@@ -158,14 +159,15 @@
             backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 24px;
-            border: 1px solid var(--border-10);
-            box-shadow: 0 15px 40px var(--shadow-main);
-            animation: fadeInDown 1s ease-out;
-            transition: border-color 0.3s ease;
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            box-shadow: 0 15px 40px var(--shadow-main), 0 0 30px rgba(168, 85, 247, 0.08);
+            animation: fadeInDown 1s ease-out, mainCardGlow 3s ease-in-out infinite;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .tab-container:hover {
-            border-color: var(--border-20);
+            border-color: rgba(192, 132, 252, 0.35);
+            box-shadow: 0 15px 40px var(--shadow-main), 0 0 50px rgba(168, 85, 247, 0.2);
         }
 
         /* ========== TABS (Botões de Navegação) ========== */
@@ -603,6 +605,18 @@
             }
         }
 
+        /* Glow do Card Principal */
+        @keyframes mainCardGlow {
+            0%, 100% {
+                box-shadow: 0 15px 40px var(--shadow-main), 0 0 25px rgba(168, 85, 247, 0.06);
+                border-color: rgba(192, 132, 252, 0.15);
+            }
+            50% {
+                box-shadow: 0 15px 40px var(--shadow-main), 0 0 45px rgba(168, 85, 247, 0.15);
+                border-color: rgba(192, 132, 252, 0.3);
+            }
+        }
+
         /* Glow do Título */
         @keyframes titleGlowPurple {
             0%, 100% {
@@ -613,6 +627,48 @@
                 text-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
                 filter: brightness(1.1);
             }
+        }
+
+        /* ========== PARTÍCULAS DE FUNDO ========== */
+        .particles-container {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #e9d5ff;
+            box-shadow: 0 0 15px rgba(192, 132, 252, 0.8);
+            filter: blur(0.5px);
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: var(--particle-opacity);
+            }
+            90% {
+                opacity: var(--particle-opacity);
+            }
+            100% {
+                transform: translateY(-150px);
+                opacity: 0;
+            }
+        }
+
+        /* Conteúdo acima das partículas */
+        .container {
+            position: relative;
+            z-index: 10;
         }
 
         /* ========== RESPONSIVIDADE ========== */
@@ -678,6 +734,9 @@
     </style>
 </head>
 <body onload="brython()">
+    <!-- Partículas de Fundo (z-0) -->
+    <div class="particles-container" id="particles"></div>
+
     <div class="container">
         <header>
             <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
@@ -1192,6 +1251,29 @@
     </script>
 
     <script>
+        // Gera 35 partículas flutuantes
+        (function() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 35; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const duration = Math.random() * 8 + 4;
+                const delay = Math.random() * 2;
+                const opacity = Math.random() * 0.5 + 0.5;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = x + '%';
+                particle.style.top = y + '%';
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay = delay + 's';
+                particle.style.setProperty('--particle-opacity', opacity);
+                container.appendChild(particle);
+            }
+        })();
+
         // Theme Toggle (padrão é dark, toggle para light)
         function toggleTheme() {
             document.body.classList.toggle('light-mode');

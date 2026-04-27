@@ -10,7 +10,7 @@
 
 **Uma calculadora de criptografia moderna e elegante desenvolvida em Python**
 
-[🌐 Demo Online](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/) • [📖 Documentação](docs/README.md) • [🚀 Como Usar](#-como-usar) • [⭐ Features](#-versão-web---use-online-)
+[🌐 Demo Online](https://cesar.felixo.com.br) • [📖 Documentação](docs/README.md) • [🚀 Como Usar](#-como-usar) • [⭐ Features](#-versão-web---use-online-)
 
 </div>
 
@@ -41,7 +41,7 @@ Um projeto completo de criptografia usando a Cifra de César, incluindo convers�
 
 > **🚀 EXPERIMENTE AGORA - Não precisa instalar nada!**
 > 
-> **[👉 CLIQUE AQUI PARA ACESSAR A APLICAÇÃO WEB 👈](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/)**
+> **[👉 CLIQUE AQUI PARA ACESSAR A APLICAÇÃO WEB 👈](https://cesar.felixo.com.br)**
 
 ### 💡 Por que usar a versão web?
 
@@ -219,7 +219,7 @@ Cifra-de-cesar-em-python/
 
 ### Opção 1: Interface Web Online (Recomendado!) 🌐
 
-**🚀 Acesse diretamente:** [https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/](https://felipe-alcantara.github.io/Cifra-de-cesar-em-python/)
+**🚀 Acesse diretamente:** [https://cesar.felixo.com.br](https://cesar.felixo.com.br)
 
 Ou abra localmente:
 ```bash
